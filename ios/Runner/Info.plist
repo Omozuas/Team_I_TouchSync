@@ -31,7 +31,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<key>NSContactsUsageDescription</key>
     <string>We need access to your contacts to save the contact information.</string>
-
+    <key>NFCReaderUsageDescription</key>
+    <string>For Testing</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
