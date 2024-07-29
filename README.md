@@ -172,11 +172,14 @@ TouchSync is an app designed for effortless sharing of contact information via N
 
 ## Contributors
 
+-  **Slack ID**
+
 - @Omozua Judah
 - @Bigfidelis
 - @ioabdullahi
 - @Shalom
 - @CyberGA
+- @prodigy_rejoice
 
 ## Mode of Contributions
 
