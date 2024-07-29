@@ -28,129 +28,114 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         bottomNavigationBar: Obx(
           () => Container(
-              height: 80,
+              height: 60,
               decoration: BoxDecoration(shape: BoxShape.rectangle),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 30.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                      onTap: () => controller.selectedIndex.value = 0,
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.house_alt_fill,
-                              color: controller.selectedIndex.value == 0
-                                  ? GlobalColors.blue
-                                  : Colors.black,
-                            ),
-                            Text(
-                              'Home',
-                              style: TextStyle(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () => controller.selectedIndex.value = 0,
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                CupertinoIcons.home,
                                 color: controller.selectedIndex.value == 0
                                     ? GlobalColors.blue
                                     : Colors.black,
+                                size: 24,
                               ),
-                            ),
-                          ],
+                              Text(
+                                'Home',
+                                style: TextStyle(
+                                  color: controller.selectedIndex.value == 0
+                                      ? GlobalColors.blue
+                                      : Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.dashboard_outlined,
-                              color: Colors.black,
-                            ),
-                            Text(
-                              'Contacts',
-                              style: TextStyle(
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                CupertinoIcons.person_2,
                                 color: Colors.black,
+                                size: 24,
                               ),
-                            ),
-                          ],
+                              Text(
+                                'Contacts',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => CartpageScreen()));
-                      },
-                      child: Container(
-                        width: 34,
-                        color: Colors.transparent,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.shopping_cart,
-                              color: Colors.black,
-                            ),
-                            Text(
-                              'History',
-                              style: TextStyle(
+                      InkWell(
+                        onTap: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => CartpageScreen()));
+                        },
+                        child: Container(
+                          // width: 34,
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                CupertinoIcons.chart_bar,
                                 color: Colors.black,
+                                size: 24,
                               ),
-                            ),
-                          ],
+                              Text(
+                                'History',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.badge_outlined,
-                              color: Colors.black,
-                            ),
-                            Text(
-                              'Profile',
-                              style: TextStyle(
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          color: Colors.transparent,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                CupertinoIcons.profile_circled,
                                 color: Colors.black,
+                                size: 24,
                               ),
-                            ),
-                          ],
+                              Text(
+                                'Profile',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.profile_circled,
-                              color: Colors.black,
-                            ),
-                            Text(
-                              'Profile',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )),
         ));
