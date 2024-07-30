@@ -29,7 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         bottomNavigationBar: Obx(
           () => Container(
               height: 60,
-              decoration: BoxDecoration(shape: BoxShape.rectangle),
+              decoration: const BoxDecoration(shape: BoxShape.rectangle),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: Center(
@@ -66,7 +66,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         onTap: () {},
                         child: Container(
                           color: Colors.transparent,
-                          child: Column(
+                          child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
@@ -94,7 +94,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         child: Container(
                           // width: 34,
                           color: Colors.transparent,
-                          child: Column(
+                          child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
@@ -113,21 +113,24 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () => controller.selectedIndex.value = 1,
                         child: Container(
                           color: Colors.transparent,
-                          child: Column(
+                          child:  Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 CupertinoIcons.profile_circled,
-                                color: Colors.black,
-                                size: 24,
+                               color: controller.selectedIndex.value == 1
+                                      ? GlobalColors.blue
+                                      : Colors.black,
                               ),
                               Text(
                                 'Profile',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                 color : controller.selectedIndex.value == 1
+                                      ? GlobalColors.blue
+                                      : Colors.black,
                                 ),
                               ),
                             ],
