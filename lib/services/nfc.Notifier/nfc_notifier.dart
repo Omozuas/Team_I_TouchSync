@@ -4,24 +4,27 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:touchsync/widgets/snackBarRes.dart';
 
 class NFCNotifier extends ChangeNotifier {
   bool _isProcessing = false;
   String _message = '';
+  Map<String, String?> _map = {};
   bool get isProcessing => _isProcessing;
   String get message => _message;
+  Map<String, String?> get map => _map;
   setLoading(bool value) {
     _isProcessing = value;
     notifyListeners();
   }
 
   Future<void> startNFCOperation(
-    NFCOperation nfcOperation,
+    NFCOperation nfcOperation, {
     String? contactName,
     String? contactEmail,
     String? contactNumber,
     String? contactUrl,
-  ) async {
+  }) async {
     try {
       setLoading(true);
       // Your NFC operation code here
@@ -81,9 +84,9 @@ class NFCNotifier extends ChangeNotifier {
 
       // Parse contact information from the decoded text
       var contactInfo = _parseContactInfo(decodedText);
-
-      // Save the parsed contact information to the phone's contacts
-      await _saveContactInfo(contactInfo);
+      _map = contactInfo;
+      // // Save the parsed contact information to the phone's contacts
+      // await _saveContactInfo(contactInfo);
     }
     _message = decodedText ?? 'No Data Found';
   }
