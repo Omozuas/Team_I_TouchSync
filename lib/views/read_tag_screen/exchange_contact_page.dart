@@ -13,7 +13,7 @@ class FormPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Container(
               width: 20,
@@ -40,6 +40,12 @@ class FormPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+            Center(
+              child: Text(
+                'Omozua Judah',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              ),
+            ),
 
             // Email Text
             Text(
