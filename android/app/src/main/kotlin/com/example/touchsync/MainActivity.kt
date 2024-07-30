@@ -1,4 +1,4 @@
-package com.example.touchsync
+package com.example.TouchSync
 
 import io.flutter.embedding.android.FlutterActivity
 
