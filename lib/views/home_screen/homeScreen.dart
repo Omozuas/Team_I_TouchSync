@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:touchsync/views/choosetag_screen.dart';
 
 import 'package:touchsync/views/scan_tag_screen.dart';
 import 'package:touchsync/views/settings/settings_screen.dart';
@@ -48,8 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         'Welcome\nTeam TouchSync',
-                        style: GoogleFonts.syne(
-                            fontSize: 16,
+                        style: GoogleFonts.poppins(
+                            fontSize: 20,
                             color: Colors.black,
                             height: 1.2,
                             fontWeight: FontWeight.w500),
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             url: 'assets/images/edit-2.png',
                             isSelected: _selectedButton == 'Write NFC Tag',
                             onTap: () => _onButtonTap(
-                                'Write NFC Tag', WritingTagScreen()),
+                                'Write NFC Tag', ChooseTagProfileScreen()),
                           ),
                           NfcTagButtons(
                             text: 'Scan NFC Tag',
@@ -117,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: RowWithTwoTexts(text1: 'All Exchanges', text2: 'View all'),
+              child: RowWithTwoTexts(text1: 'Recent Exchanges', text2: 'View all'),
             ),
             const SizedBox(
               height: 10,

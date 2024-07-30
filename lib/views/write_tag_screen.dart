@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:touchsync/views/write_succesful_screen.dart';
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 import 'package:touchsync/widgets/custom_textfield.dart';
+import 'write_succesful_screen.dart';
 
 class WritingTagScreen extends StatefulWidget {
-  const WritingTagScreen({super.key});
+  final String profileType;
+
+  const WritingTagScreen({super.key, required this.profileType});
 
   @override
   State<WritingTagScreen> createState() => _WritingTagScreenState();
@@ -74,15 +75,23 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
                 CustomTextField(
                     label: 'Social Media Links',
                     hintText: 'Enter social media links'),
+                if (widget.profileType == 'Professional Profile') ...[
+                  const SizedBox(height: 20),
+                  CustomTextField(label: 'Job Title', hintText: 'Enter job title'),
+                  const SizedBox(height: 20),
+                  CustomTextField(label: 'Company', hintText: 'Enter company name'),
+                ],
                 const SizedBox(height: 30),
                 CustomElevatedButton(
                   text: 'Save',
                   onPressed: () {
-                    // Add your onPressed functionality here TO save the details and upon completion, it should navigate to the succesful screen
+                    // Add your onPressed functionality here
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WriteSuccesfulScreen()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WriteSuccesfulScreen(),
+                      ),
+                    );
                   },
                 ),
               ],
@@ -93,3 +102,4 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
     );
   }
 }
+

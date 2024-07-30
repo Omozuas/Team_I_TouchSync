@@ -29,7 +29,11 @@ class ContactHistoryList extends StatelessWidget {
         return ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.teal,
-            child: Icon(Icons.sync, color: Colors.white),
+            child: ImageIcon(
+                        AssetImage(
+                          'assets/images/export.png',
+                        ),
+                      ),
           ),
           title: Text(histories[index].title),
           subtitle: Text(histories[index].subtitle),
