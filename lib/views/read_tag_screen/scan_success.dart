@@ -16,7 +16,7 @@ class _ReadTagSuccessPageState extends State<ReadTagSuccessPage> {
   @override
   void initState() {
     super.initState();
-    // Delay the popup to ensure the widget is fully built before showing the dialog
+    // init the function on navigation with a popup
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showHalfScreenPopup(context);
     });
@@ -44,7 +44,7 @@ class _ReadTagSuccessPageState extends State<ReadTagSuccessPage> {
                   color: GlobalColors.transparentBlue,
                   shape: BoxShape.circle,
                 ),
-                child: SuccessIcon(),
+                child: SuccessIcon(),// widget for success screen 
               ),
               Text('Scan Successful'),
             ],
@@ -58,7 +58,7 @@ class _ReadTagSuccessPageState extends State<ReadTagSuccessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text(""),
+      body: Text("overrides the home screen"),
     );
   }
 }

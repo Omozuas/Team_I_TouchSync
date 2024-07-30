@@ -95,7 +95,7 @@ class FormPage extends StatelessWidget {
                     text: TextSpan(
                       text: 'Facebook ',
                       style: TextStyle(
-                        color: Colors.blue, // Highlighted color
+                        color: GlobalColors.blue, // Highlighted color
                         fontSize:
                             16, // Ensure font size matches the TextFormField
                       ),
@@ -103,7 +103,7 @@ class FormPage extends StatelessWidget {
                         TextSpan(
                           text: 'Twitter',
                           style: TextStyle(
-                            color: Colors.grey, // Default hint text color
+                            color: GlobalColors.blue, // Default hint text color
                             fontSize:
                                 16, // Ensure font size matches the TextFormField
                           ),
@@ -127,7 +127,7 @@ class FormPage extends StatelessWidget {
             ReadPageForm(
               hintText: 'New York, USA',
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             ActionBtn(
               screenWidth: screenWidth,
               screenHeight: screenHeight,
@@ -136,7 +136,7 @@ class FormPage extends StatelessWidget {
               btnColor1: GlobalColors.blue,
               btnColor2: GlobalColors.blue,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             ActionBtn(
               screenWidth: screenWidth,
               screenHeight: screenHeight,

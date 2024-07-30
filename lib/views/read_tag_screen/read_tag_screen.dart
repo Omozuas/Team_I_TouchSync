@@ -16,7 +16,7 @@ class _ReadTagPageState extends State<ReadTagPage> {
   @override
   void initState() {
     super.initState();
-    // Delay the popup to ensure the widget is fully built before showing the dialog
+    // initialize the code with delay once clicked 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showHalfScreenPopup(context);
     });
@@ -68,7 +68,7 @@ class _ReadTagPageState extends State<ReadTagPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text(""),
+      body: Text("from Home"),
     );
   }
 }
