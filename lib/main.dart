@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FormPage(), //const BottomNavigation(),
+      home: ReadTagPage(), //const BottomNavigation(),
     );
   }
 }
