@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:touchsync/global-colors/colorsHex.dart';
-
+import 'package:touchsync/views/read_tag_screen/exchange_contact_page.dart';
 import '../home_screen/homeScreen.dart';
 import 'widget/sucees_Icon.dart';
 
@@ -16,9 +16,17 @@ class _ReadTagSuccessPageState extends State<ReadTagSuccessPage> {
   @override
   void initState() {
     super.initState();
-    // init the function on navigation with a popup
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showHalfScreenPopup(context);
+    });
+
+    Future.delayed(Duration(seconds: 5), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ExchangePage(),
+        ),
+      );
     });
   }
 
@@ -44,7 +52,7 @@ class _ReadTagSuccessPageState extends State<ReadTagSuccessPage> {
                   color: GlobalColors.transparentBlue,
                   shape: BoxShape.circle,
                 ),
-                child: SuccessIcon(),// widget for success screen 
+                child: SuccessIcon(),
               ),
               Text('Scan Successful'),
             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:touchsync/global-colors/colorsHex.dart';
+import 'package:touchsync/views/read_tag_screen/scan_success.dart';
 
 import '../home_screen/homeScreen.dart';
 import 'widget/action_botton.dart';
@@ -16,9 +17,16 @@ class _ReadTagPageState extends State<ReadTagPage> {
   @override
   void initState() {
     super.initState();
-    // initialize the code with delay once clicked 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showHalfScreenPopup(context);
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ReadTagSuccessPage(),
+        ),
+      );
     });
   }
 
@@ -32,13 +40,13 @@ class _ReadTagPageState extends State<ReadTagPage> {
 
         return Container(
           width: screenWidth,
-          height: screenHeight / 2,
+          height: screenHeight / 1.8,
           padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: 10),
-              Text('Ready to scan'),
+              Text('Ready to scan', style: TextStyle(fontSize: 18)),
               SizedBox(height: 20),
               Image.asset(
                 'assets/images/icon.png',
@@ -47,12 +55,12 @@ class _ReadTagPageState extends State<ReadTagPage> {
                 fit: BoxFit.contain,
               ),
               SizedBox(height: 20),
-              Text('Hold your phone steady'),
+              Text('Hold your phone steady', style: TextStyle(fontSize: 18)),
               SizedBox(height: 20),
               ActionBtn(
                 screenWidth: screenWidth,
                 screenHeight: screenHeight,
-                info: Text("Cancel"),
+                info: Text("Cancel", style: TextStyle(color: Colors.white)),
                 func: () => Navigator.pop(context),
                 btnColor1: GlobalColors.blue,
                 btnColor2: GlobalColors.blue,
