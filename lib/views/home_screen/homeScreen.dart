@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    var screenWidth = screenSize.width;
+    // var screenWidth = screenSize.width;
     var screenHeight = screenSize.height;
 
     return SafeArea(
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         child: const ImageIcon(
                           AssetImage(
-                            'assets/setting-2.png',
+                            'assets/images/setting-2.png',
                           ),
                         ),
                       ),
@@ -95,14 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           NfcTagButtons(
                             text: 'Write NFC Tag',
-                            url: 'assets/edit-2.png',
+                            url: 'assets/images/edit-2.png',
                             isSelected: _selectedButton == 'Write NFC Tag',
                             onTap: () => _onButtonTap(
                                 'Write NFC Tag', WritingTagScreen()),
                           ),
                           NfcTagButtons(
                             text: 'Scan NFC Tag',
-                            url: 'assets/scanner.png',
+                            url: 'assets/images/scanner.png',
                             isSelected: _selectedButton == 'Scan NFC Tag',
                             onTap: () => _onButtonTap(
                                 'Scan NFC Tag', ScanningTagScreen()),

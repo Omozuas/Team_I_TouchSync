@@ -1,21 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class ContactHistoryList extends StatelessWidget {
   final List<ContactHistory> histories = [
     ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
     ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
     ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory('Saved Michael John to contacts', '28th July, 2024', '10:05am'),
+    ContactHistory(
+        'Saved Michael John to contacts', '28th July, 2024', '10:05am'),
     ContactHistory('Saved Ify to contacts', '28th July, 2024', '12:50pm'),
     ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
     ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
     ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory('Saved Michael John to contacts', '28th July, 2024', '10:05am'),
+    ContactHistory(
+        'Saved Michael John to contacts', '28th July, 2024', '10:05am'),
     ContactHistory('Saved Ify to contacts', '28th July, 2024', '12:50pm'),
   ];
- ContactHistoryList({super.key});
+  ContactHistoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
