@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const ReadTagPage(), //BottomNavigation(),
+        home: const BottomNavigation(),
       ),
     );
   }
