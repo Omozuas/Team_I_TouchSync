@@ -1,31 +1,95 @@
 import 'package:flutter/material.dart';
-
+import 'package:touchsync/views/read_tag_screen/success_exchange.dart';
 import '../../global-colors/colorsHex.dart';
 import 'widget/action_botton.dart';
-import 'widget/read_page_form.dart'; // Import the new widget
+import 'widget/read_page_form.dart';
 
-class FormPage extends StatelessWidget {
+class ExchangePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final screenHeight = mediaQuery.size.height;
     final screenWidth = mediaQuery.size.width;
+
+    void _showSaveContactDialog(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Container(
+              height: screenHeight / 3,
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Save Contact to phone',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Save this contact to your phone storage.\nDo you want to allow this?',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        child: Text(
+                          'Allow',
+                          style: TextStyle(color: Colors.blue, fontSize: 18),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SuccessExchangePage(),
+                            ),
+                          );
+                        },
+                      ),
+                      TextButton(
+                        child: Text(
+                          'Done',
+                          style: TextStyle(color: Colors.red, fontSize: 18),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Container(
-              width: 20,
-              height: 20,
-              child: Icon(Icons.arrow_back, color: Colors.black)),
+            width: 20,
+            height: 20,
+            child: Icon(Icons.arrow_back, color: Colors.black),
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Text(
           'Go Back',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 16),
         ),
       ),
       body: SingleChildScrollView(
@@ -43,50 +107,38 @@ class FormPage extends StatelessWidget {
             Center(
               child: Text(
                 'Omozua Judah',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
               ),
             ),
-
-            // Email Text
+            SizedBox(height: 20),
             Text(
               'Email',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             SizedBox(height: 10),
-
-            // Email ReadPageForm
             ReadPageForm(
               hintText: 'paul.fidelis@example.com',
             ),
             SizedBox(height: 20),
-
-            // Phone Contacts
             Text(
               'Phone Contacts',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             SizedBox(height: 10),
-
-            // Phone Contacts ReadPageForm
             ReadPageForm(
               hintText: 'Paul Fidelis',
             ),
             SizedBox(height: 20),
-
-            // Social Media Link
             Text(
               'Social Media Link',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             SizedBox(height: 10),
-
-            // Social Media Link ReadPageForm
             Stack(
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText:
-                        '', // Empty hintText so it doesn't override the custom hint text
+                    hintText: '',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -95,23 +147,20 @@ class FormPage extends StatelessWidget {
                 ),
                 Positioned(
                   left: 12,
-                  top:
-                      12, // Adjust the position to fit within the TextFormField
+                  top: 12,
                   child: RichText(
                     text: TextSpan(
                       text: 'Facebook ',
                       style: TextStyle(
-                        color: GlobalColors.blue, // Highlighted color
-                        fontSize:
-                            16, // Ensure font size matches the TextFormField
+                        color: GlobalColors.blue,
+                        fontSize: 18,
                       ),
                       children: <TextSpan>[
                         TextSpan(
                           text: 'Twitter',
                           style: TextStyle(
-                            color: GlobalColors.blue, // Default hint text color
-                            fontSize:
-                                16, // Ensure font size matches the TextFormField
+                            color: GlobalColors.blue,
+                            fontSize: 18,
                           ),
                         ),
                       ],
@@ -121,19 +170,15 @@ class FormPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-
-            // Location
             Text(
               'Location',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
             ),
             SizedBox(height: 10),
-
-            // Location ReadPageForm
             ReadPageForm(
               hintText: 'New York, USA',
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 20),
             ActionBtn(
               screenWidth: screenWidth,
               screenHeight: screenHeight,
@@ -142,13 +187,15 @@ class FormPage extends StatelessWidget {
               btnColor1: GlobalColors.blue,
               btnColor2: GlobalColors.blue,
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 20),
             ActionBtn(
               screenWidth: screenWidth,
               screenHeight: screenHeight,
-              info: Text(" Save to phone,",
-                  style: TextStyle(color: GlobalColors.blue)),
-              func: () => Navigator.pop(context),
+              info: Text(
+                "Save to phone",
+                style: TextStyle(color: GlobalColors.blue),
+              ),
+              func: () => _showSaveContactDialog(context),
               btnColor1: GlobalColors.white,
               btnColor2: GlobalColors.blue,
             ),
