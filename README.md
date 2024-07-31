@@ -6,11 +6,11 @@ TouchSync is an innovative mobile application designed to streamline the process
 1. [Overview](#overview)
 2. [Objectives and Goals](#objectives-and-goals)
 3. [Target Audience](#target-audience)
-4. [Key Features ](#key-features)
+4. [Key Features](#key-features)
    - [Core Features](#core-features)
    - [Additional Features](#additional-features)
    - [User Interface](#user-interface)
-5. [Technical Features ](#technical-features)
+5. [Technical Features](#technical-features)
 6. [Contributors](#contributors)
 7. [Mode of Contributions](#mode-of-contributions)
 8. [Conclusion](#conclusion)
@@ -20,7 +20,6 @@ TouchSync is an innovative mobile application designed to streamline the process
 **Tagline:** Seamless Contact Exchange
 
 TouchSync is an app designed for effortless sharing of contact information via NFC technology.
-
 
 **Download Link:** [https://tsfr.io/join/tqea6u](https://tsfr.io/join/tqea6u)
 
@@ -81,7 +80,7 @@ TouchSync is an app designed for effortless sharing of contact information via N
 1. **Home Screen:**
    - Quick access to scan NFC tags and view recent exchanges.
    - ![Home Screen](assets/images/splash.png)
-   - - ![Home Screen](assets/images/Home%20(1).png)
+   - ![Home Screen](assets/images/Home%20(1).png)
 
 2. **Profile Screen:**
    - Manage personal information and customize shared details.
@@ -95,18 +94,18 @@ TouchSync is an app designed for effortless sharing of contact information via N
    - Display a log of all exchanges with timestamps.
    - ![History Screen](assets/images/History.png)
 
-5. **Read  Screen:**
+5. **Read Screen:**
    - Read Tag information.
-   - ![Settings Screen](assets/images/readtag.png)
+   - ![Read Screen](assets/images/readtag.png)
 
-6. **Write  Screen:**
+6. **Write Screen:**
    - Write to Tag Screen.
-   - ![Settings Screen](assets/images/writeTag.png)
+   - ![Write Screen](assets/images/writeTag.png)
 
 ## Technical Features
 
 ### Platform Compatibility
-- **Description:** The app is compatible with NFC supported  mobile operating systems.
+- **Description:** The app is compatible with NFC-supported mobile operating systems.
 - **Requirements:** Support for Android (version 7.0 and above) and iOS (version 11.0 and above), full NFC functionality.
 
 ### Data Storage and Encryption
@@ -116,10 +115,6 @@ TouchSync is an app designed for effortless sharing of contact information via N
 ### Performance and Scalability
 - **Description:** Ensure the app performs well under various conditions.
 - **Requirements:** Quick detection and reading of NFC tags, efficient data handling and minimal battery consumption.
-
-
-
-
 
 ## Contributors
 
