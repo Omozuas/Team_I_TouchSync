@@ -2,14 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:touchsync/services/database/contactDb.dart';
 import 'package:touchsync/services/database/schemas/contact.schema.dart';
 
-bool _isLoading = false;
-bool get loading => _isLoading;
-String _message = '';
-String get message => _message;
-setLoading(bool value) {
-  _isLoading = value;
-}
-
 class Contactprovider extends ChangeNotifier {
   bool _isLoading = false;
   bool get loading => _isLoading;
@@ -22,6 +14,10 @@ class Contactprovider extends ChangeNotifier {
   final ContactDatabaseHelper _databaseHelper = ContactDatabaseHelper.instance;
   List<ContactSchema> _profiles = [];
   List<ContactSchema> get profiles => _profiles;
+  List<ContactSchema> _recentContacts = [];
+  List<ContactSchema> get recentContacts => _recentContacts;
+  ContactSchema? _contact;
+  ContactSchema? get contact => _contact;
   Contactprovider() {
     fetchProfiles();
   }
@@ -36,10 +32,31 @@ class Contactprovider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> fetchRecentContacts(
+      {String? sortBy, bool ascending = false}) async {
+    setLoading(true);
+    _recentContacts = await _databaseHelper.fetchRecentContacts(
+        sortBy: sortBy, ascending: ascending);
+
+    setLoading(false);
+    notifyListeners();
+  }
+
+  Future<void> fetchRecentContacts24(
+      {String? sortBy, bool ascending = false}) async {
+    setLoading(true);
+    _profiles = await _databaseHelper.fetchRecentContacts24(
+        sortBy: sortBy, ascending: ascending);
+
+    setLoading(false);
+    notifyListeners();
+  }
+
   Future<void> addItem(ContactSchema profile) async {
     setLoading(true);
     await _databaseHelper.insertProfile(profile);
     fetchProfiles();
+    fetchRecentContacts(ascending: false, sortBy: 'time');
     setLoading(false);
     _message = ' ';
     notifyListeners();
@@ -56,6 +73,7 @@ class Contactprovider extends ChangeNotifier {
 
   Future<void> deleteItem(String id) async {
     setLoading(true);
+    print(id);
     await _databaseHelper.deleteProfile(id);
     fetchProfiles();
     setLoading(false);
@@ -63,8 +81,10 @@ class Contactprovider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<ContactSchema?> getDatabyId(String id) async {
+  Future<void> getDatabyId(String id) async {
     setLoading(true);
-    return await _databaseHelper.fetchProfileById(id);
+    _contact = await _databaseHelper.fetchProfileById(id);
+    setLoading(false);
+    notifyListeners();
   }
 }

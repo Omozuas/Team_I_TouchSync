@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:touchsync/controller/bottomNavController/bottomNav_controller.dart';
 import 'package:touchsync/routers/bottomNavRoute/bottomNav_Route.dart';
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 
@@ -9,10 +10,10 @@ class WriteSuccesfulScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(BottomNavigationController());
     var screenSize = MediaQuery.of(context).size;
     // var screenWidth = screenSize.width;
     var screenHeight = screenSize.height;
-    final controller = Get.put(BottomNavigationController());
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,14 +50,20 @@ class WriteSuccesfulScreen extends StatelessWidget {
             height: screenHeight * 0.02,
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomElevatedButton(
-                  text: 'Go to profile',
+                  text: 'Go to Home',
                   backgroundColor: Colors.white,
                   textColor: Color(0xff007192),
                   borderColor: const Color(0xff007192),
                   // navigate to profile screen
-                  onPressed: () => controller.selectedIndex.value = 1)),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BottomNavigation()));
+                    controller.selectedIndex.value = 3;
+                  })),
         ],
       ),
     );

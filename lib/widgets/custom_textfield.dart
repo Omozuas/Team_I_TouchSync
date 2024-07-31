@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final String hintText;
-
-  CustomTextField({required this.label, required this.hintText});
+  final controller;
+  CustomTextField(
+      {required this.label, required this.hintText, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class CustomTextField extends StatelessWidget {
         ),
         SizedBox(height: 8),
         TextField(
+          controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: GoogleFonts.syne(
@@ -46,4 +48,5 @@ class CustomTextField extends StatelessWidget {
         ),
       ],
     );
-  }}
+  }
+}

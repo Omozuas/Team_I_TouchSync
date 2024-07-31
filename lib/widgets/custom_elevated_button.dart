@@ -41,7 +41,6 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -71,7 +70,9 @@ class CustomElevatedButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
-            side: borderColor != null ? BorderSide(color: borderColor!) : BorderSide.none,
+            side: borderColor != null
+                ? BorderSide(color: borderColor!)
+                : BorderSide.none,
           ),
           padding: EdgeInsets.symmetric(vertical: 16),
         ),

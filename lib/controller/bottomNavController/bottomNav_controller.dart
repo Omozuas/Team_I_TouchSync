@@ -63,21 +63,25 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () => controller.selectedIndex.value = 1,
                         child: Container(
                           color: Colors.transparent,
-                          child: const Column(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 CupertinoIcons.person_2,
-                                color: Colors.black,
+                                color: controller.selectedIndex.value == 1
+                                    ? GlobalColors.blue
+                                    : Colors.black,
                                 size: 24,
                               ),
                               Text(
                                 'Contacts',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: controller.selectedIndex.value == 1
+                                      ? GlobalColors.blue
+                                      : Colors.black,
                                 ),
                               ),
                             ],
@@ -85,27 +89,26 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => CartpageScreen()));
-                        },
+                        onTap: () => controller.selectedIndex.value = 2,
                         child: Container(
                           // width: 34,
                           color: Colors.transparent,
-                          child: const Column(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 CupertinoIcons.chart_bar,
-                                color: Colors.black,
+                                color: controller.selectedIndex.value == 2
+                                    ? GlobalColors.blue
+                                    : Colors.black,
                                 size: 24,
                               ),
                               Text(
                                 'History',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: controller.selectedIndex.value == 2
+                                      ? GlobalColors.blue
+                                      : Colors.black,
                                 ),
                               ),
                             ],
@@ -113,22 +116,22 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         ),
                       ),
                       InkWell(
-                        onTap: () => controller.selectedIndex.value = 1,
+                        onTap: () => controller.selectedIndex.value = 3,
                         child: Container(
                           color: Colors.transparent,
-                          child:  Column(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 CupertinoIcons.profile_circled,
-                               color: controller.selectedIndex.value == 1
-                                      ? GlobalColors.blue
-                                      : Colors.black,
+                                color: controller.selectedIndex.value == 3
+                                    ? GlobalColors.blue
+                                    : Colors.black,
                               ),
                               Text(
                                 'Profile',
                                 style: TextStyle(
-                                 color : controller.selectedIndex.value == 1
+                                  color: controller.selectedIndex.value == 3
                                       ? GlobalColors.blue
                                       : Colors.black,
                                 ),

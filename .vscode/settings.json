@@ -3,5 +3,6 @@
   "search.exclude": {
     "**/.fvm": true,
    
-  }
+  },
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

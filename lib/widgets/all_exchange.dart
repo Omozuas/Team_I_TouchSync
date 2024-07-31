@@ -2,30 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ContactHistoryList extends StatelessWidget {
-  final List<ContactHistory> histories = [
-    ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory(
-        'Saved Michael John to contacts', '28th July, 2024', '10:05am'),
-    ContactHistory('Saved Ify to contacts', '28th July, 2024', '12:50pm'),
-    ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory('Shared contact with Judah', '28th July, 2024', '8:59am'),
-    ContactHistory(
-        'Saved Michael John to contacts', '28th July, 2024', '10:05am'),
-    ContactHistory('Saved Ify to contacts', '28th July, 2024', '12:50pm'),
-  ];
-  ContactHistoryList({super.key});
-
+  ContactHistoryList({super.key, required this.get});
+  final get;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.zero,
-      itemCount: histories.length,
+      itemCount: get.length,
       itemBuilder: (context, index) {
+        final contact = get[index];
         return ListTile(
           leading: CircleAvatar(
            // radius: 50,
@@ -36,19 +23,11 @@ class ContactHistoryList extends StatelessWidget {
                         ),
                       ),
           ),
-          title: Text(histories[index].title),
-          subtitle: Text(histories[index].subtitle),
-          trailing: Text(histories[index].time),
+          title: Text('${contact.texts}'),
+          subtitle: Text(contact.day),
+          trailing: Text(contact.time),
         );
       },
     );
   }
-}
-
-class ContactHistory {
-  final String title;
-  final String subtitle;
-  final String time;
-
-  ContactHistory(this.title, this.subtitle, this.time);
 }
