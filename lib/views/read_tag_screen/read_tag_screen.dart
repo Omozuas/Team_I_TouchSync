@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:touchsync/global-colors/colorsHex.dart';
+import 'package:touchsync/views/home_screen/homeScreen.dart';
 
-import '../home_screen/homeScreen.dart';
 import 'widget/action_botton.dart';
 
 class ReadTagPage extends StatefulWidget {
@@ -16,7 +15,7 @@ class _ReadTagPageState extends State<ReadTagPage> {
   @override
   void initState() {
     super.initState();
-    // initialize the code with delay once clicked 
+    // initialize the code with delay once clicked
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showHalfScreenPopup(context);
     });
@@ -68,7 +67,7 @@ class _ReadTagPageState extends State<ReadTagPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("from Home"),
+      body: HomeScreen(),
     );
   }
 }

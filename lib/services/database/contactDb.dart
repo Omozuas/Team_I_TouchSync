@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:touchsync/services/database/schemas/contact.schema.dart';
@@ -47,7 +48,8 @@ class ContactDatabaseHelper {
         teams TEXT,
         notion TEXT,
         day TEXT,
-        time TEXT
+        time TEXT,
+        texts Text
       )
     ''');
   }
@@ -79,6 +81,61 @@ class ContactDatabaseHelper {
       whereArgs: whereArgs,
       orderBy: orderBy,
     );
+    return List.generate(maps.length, (i) {
+      return ContactSchema.fromMap(maps[i]);
+    });
+  }
+
+  Future<List<ContactSchema>> fetchRecentContacts(
+      {String? sortBy, bool ascending = false}) async {
+    Database db = await instance.database;
+
+    // Default sorting by recently added time in descending order
+    String defaultSortBy = 'time';
+    String orderBy = defaultSortBy;
+
+    // If a specific sortBy is provided, override the default sorting
+    if (sortBy != null && sortBy.isNotEmpty) {
+      orderBy = '$sortBy ${ascending ? 'ASC' : 'DESC'}';
+    }
+
+    // Adding limit clause to the query
+    final List<Map<String, dynamic>> maps = await db.query(
+      'contacts',
+      orderBy: orderBy,
+      limit: 12,
+    );
+
+    // Debugging step
+    print('Fetched ${maps.length} contacts');
+
+    return List.generate(maps.length, (i) {
+      return ContactSchema.fromMap(maps[i]);
+    });
+  }
+
+  Future<List<ContactSchema>> fetchRecentContacts24(
+      {String? sortBy, bool ascending = false}) async {
+    Database db = await instance.database;
+
+    // Default sorting by recently added time in descending order
+    String defaultSortBy = 'time';
+    String orderBy = defaultSortBy;
+
+    // If a specific sortBy is provided, override the default sorting
+    if (sortBy != null && sortBy.isNotEmpty) {
+      orderBy = '$sortBy ${ascending ? 'ASC' : 'DESC'}';
+    }
+
+    // Adding limit clause to the query
+    final List<Map<String, dynamic>> maps = await db.query(
+      'contacts',
+      orderBy: orderBy,
+    );
+
+    // Debugging step
+    print('Fetched ${maps.length} contacts');
+
     return List.generate(maps.length, (i) {
       return ContactSchema.fromMap(maps[i]);
     });

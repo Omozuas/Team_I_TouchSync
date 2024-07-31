@@ -17,6 +17,7 @@ class ContactSchema {
   final String? zoomMeeting;
   final String? teams;
   final String? notion;
+  final String? texts;
   final String day;
   final String time;
 
@@ -39,6 +40,7 @@ class ContactSchema {
       this.zoomMeeting,
       required this.day,
       required this.time,
+      this.texts,
       this.teams,
       this.notion});
 
@@ -62,6 +64,7 @@ class ContactSchema {
       'snapchat': snapchat,
       'zoomMeeting': zoomMeeting,
       'teams': teams,
+      'texts': texts,
       'day': day,
       'time': time,
     };
@@ -87,6 +90,7 @@ class ContactSchema {
       snapchat: map['snapchat'],
       zoomMeeting: map['zoomMeeting'],
       teams: map['teams'],
+      texts: map['texts'],
       day: map['day'],
       time: map['time'],
     );

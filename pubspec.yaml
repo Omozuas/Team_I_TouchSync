@@ -52,13 +52,14 @@ dependencies:
   another_flushbar: ^1.12.30
   intl: ^0.19.0
   flutter_native_splash: ^2.4.1
+  gap: ^3.0.1
+  cool_alert: ^2.0.1
 
 flutter_native_splash:
   android : true
   ios : true
   web : true
-  color : "#007198"
-  image : "assets/images/icon1.png"
+  
 
 dev_dependencies:
   flutter_test:
@@ -74,11 +75,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/icon.png"
+  image_path: "assets/images/icon2.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/images/icon.png"
+    image_path: "assets/images/icon2.png"
     background_color: "#hexcode"
     theme_color: "#hexcode"
 flutter_app_name:
