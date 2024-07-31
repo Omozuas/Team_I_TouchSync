@@ -79,28 +79,28 @@ TouchSync is an app designed for effortless sharing of contact information via N
 
 1. **Home Screen:**
    - Quick access to scan NFC tags and view recent exchanges.
-   - ![Home Screen](assets/images/splash.png)
-   - ![Home Screen](assets/images/Home%20(1).png)
+   - ![Home Screen](https://drive.google.com/uc?export=view&id=17qPOCvHQ88B_9u8xfFQ9k8FN0wv8L_KD)
+   - ![Home Screen](https://drive.google.com/uc?export=view&id=1MPwDfQFL8rUdCKKmiaPsgMdiu_MYz3SZ)
 
 2. **Profile Screen:**
    - Manage personal information and customize shared details.
-   - ![Profile Screen](assets/images/Profile.png)
+   - ![Profile Screen](https://drive.google.com/uc?export=view&id=1vsdOrGPHMi-i07MfEaWEJVuxQazjUohy)
 
 3. **Contacts Screen:**
    - List of saved contacts with search and filter options.
-   - ![Contacts Screen](assets/Contacts.png)
+   - ![Contacts Screen](https://drive.google.com/uc?export=view&id=1QRtr52BSkAIy0owW-JZkSi--521tvnWV)
 
 4. **History Screen:**
    - Display a log of all exchanges with timestamps.
-   - ![History Screen](assets/images/History.png)
+   - ![History Screen](https://drive.google.com/uc?export=view&id=1GpwxkCVwtawnptPNnMXgbxuC5E17hbgx)
 
 5. **Read Screen:**
    - Read Tag information.
-   - ![Read Screen](assets/images/readtag.png)
+   - ![Read Screen](https://drive.google.com/uc?export=view&id=1SeitopVR1hjvb05NWEdDltarWzQX08Lv)
 
 6. **Write Screen:**
    - Write to Tag Screen.
-   - ![Write Screen](assets/images/writeTag.png)
+   - ![Write Screen](https://drive.google.com/uc?export=view&id=1DriPI8IYIo4N53K_bYH834mvKhz1ULvj)
 
 ## Technical Features
 
