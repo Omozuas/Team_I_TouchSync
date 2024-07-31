@@ -56,6 +56,7 @@ class Contactprovider extends ChangeNotifier {
     setLoading(true);
     await _databaseHelper.insertProfile(profile);
     fetchProfiles();
+    fetchRecentContacts(ascending: false, sortBy: 'time');
     setLoading(false);
     _message = ' ';
     notifyListeners();

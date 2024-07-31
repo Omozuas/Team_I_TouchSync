@@ -4,7 +4,6 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:touchsync/widgets/snackBarRes.dart';
 
 class NFCNotifier extends ChangeNotifier {
   bool _isProcessing = false;
@@ -15,7 +14,6 @@ class NFCNotifier extends ChangeNotifier {
   Map<String, String?> get map => _map;
   setLoading(bool value) {
     _isProcessing = value;
-    notifyListeners();
   }
 
   Future<void> startNFCOperation(
@@ -35,7 +33,7 @@ class NFCNotifier extends ChangeNotifier {
         if (nfcOperation == NFCOperation.read) {
           _message = 'Scanning...';
         } else if (nfcOperation == NFCOperation.write) {
-          _message = 'Writting To Tag...';
+          _message = 'Write To Tag...';
         }
         notifyListeners();
         NfcManager.instance.startSession(
@@ -56,17 +54,20 @@ class NFCNotifier extends ChangeNotifier {
             await NfcManager.instance.stopSession();
           },
           onError: (error) async {
-            _message = error.message;
+            _message = error.toString();
             setLoading(false);
+            notifyListeners();
           },
         );
       } else {
         _message = 'please Enable NFC From Settings';
         setLoading(false);
+        notifyListeners();
       }
     } catch (e) {
       _message = e.toString();
       setLoading(false);
+      notifyListeners();
     }
   }
 
@@ -79,7 +80,7 @@ class NFCNotifier extends ChangeNotifier {
     String? decodedText;
     if (nfcData.containsKey('ndef')) {
       List<int> payload =
-          nfcData['ndef']['cashedMessage']?['records']?[0]['payload'];
+          nfcData['ndef']['cachedMessage']?['records']?[0]['payload'];
       decodedText = String.fromCharCodes(payload);
 
       // Parse contact information from the decoded text
@@ -87,6 +88,7 @@ class NFCNotifier extends ChangeNotifier {
       _map = contactInfo;
       // // Save the parsed contact information to the phone's contacts
       // await _saveContactInfo(contactInfo);
+      _message = 'success';
     }
     _message = decodedText ?? 'No Data Found';
   }
@@ -136,7 +138,8 @@ class NFCNotifier extends ChangeNotifier {
     return NdefMessage(records);
   }
 
-  Future<void> _saveContactInfo(Map<String, String?> contactInfo) async {
+  Future<void> saveContactInfo(Map<String, String?> contactInfo) async {
+    print(contactInfo);
     bool permissionGranted = await requestContactPermissions();
 
     if (permissionGranted) {
@@ -172,7 +175,7 @@ class NFCNotifier extends ChangeNotifier {
     String? phoneNumber;
     String? url;
     for (var line in lines) {
-      if (line.startsWith('FN:')) {
+      if (line.startsWith('N:')) {
         name = line.substring(3);
       } else if (line.startsWith('EMAIL:')) {
         email = line.substring(6);

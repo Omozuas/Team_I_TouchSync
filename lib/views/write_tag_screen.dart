@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
 import 'package:touchsync/views/write_succesful_screen.dart';
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 import 'package:touchsync/widgets/custom_textfield.dart';
@@ -13,8 +15,14 @@ class WritingTagScreen extends StatefulWidget {
 }
 
 class _WritingTagScreenState extends State<WritingTagScreen> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _urlController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final get1 = context.watch<NFCNotifier>();
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -64,25 +72,45 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                CustomTextField(label: 'Name', hintText: 'Enter name'),
-                const SizedBox(height: 20),
-                CustomTextField(label: 'Email', hintText: 'Enter email'),
+                CustomTextField(
+                  label: 'Name',
+                  hintText: 'Enter name',
+                  controller: _nameController,
+                ),
                 const SizedBox(height: 20),
                 CustomTextField(
-                    label: 'Phone Contact', hintText: 'Enter phone contact'),
+                  label: 'Email',
+                  hintText: 'Enter email',
+                  controller: _emailController,
+                ),
                 const SizedBox(height: 20),
                 CustomTextField(
-                    label: 'Social Media Links',
-                    hintText: 'Enter social media links'),
+                  label: 'Phone Contact',
+                  hintText: 'Enter phone contact',
+                  controller: _phoneController,
+                ),
+                const SizedBox(height: 20),
+                CustomTextField(
+                  label: 'Social Media Links',
+                  hintText: 'Enter social media links',
+                  controller: _urlController,
+                ),
                 const SizedBox(height: 30),
                 CustomElevatedButton(
-                  text: 'Save',
+                  text: get1.message.isEmpty ? 'Save' : get1.message,
                   onPressed: () {
+                    get1.startNFCOperation(NFCOperation.write,
+                        contactName: _nameController.text,
+                        contactEmail: _emailController.text,
+                        contactNumber: _phoneController.text,
+                        contactUrl: _urlController.text);
                     // Add your onPressed functionality here TO save the details and upon completion, it should navigate to the succesful screen
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WriteSuccesfulScreen()));
+                    get1.message == 'DONE'
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WriteSuccesfulScreen()))
+                        : Container();
                   },
                 ),
               ],

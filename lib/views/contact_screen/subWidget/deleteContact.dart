@@ -1,7 +1,7 @@
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:touchsync/controller/bottomNavController/bottomNav_controller.dart';
@@ -191,104 +191,120 @@ class _DeleteContactScreenState extends State<DeleteContactScreen> {
       ),
     );
   }
-}
 
-void _showDeleteDialog(BuildContext context, id) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      final get = context.watch<Contactprovider>();
-      return AlertDialog(
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        title: Center(
-          child: Text(
-            'Delete Contact',
-            style: GoogleFonts.syne(fontWeight: FontWeight.w500, fontSize: 24),
+  void _showDeleteDialog(BuildContext context, id) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final get = context.watch<Contactprovider>();
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
           ),
-        ),
-        content: Text(
-          'Once this contact is deleted, you will lose all information regarding this contact permanently. Do you wish to continue?',
-          textAlign: TextAlign.center,
-          style: GoogleFonts.syne(fontSize: 16, fontWeight: FontWeight.w400),
-        ),
-        actionsAlignment: MainAxisAlignment.end,
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              get.deleteItem(id);
-              _showDeleteConfirmation(context);
-            },
+          title: Center(
             child: Text(
-              'Yes, Delete',
-              style: GoogleFonts.syne(
-                  color: const Color(0xffFF3145),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              'No, Cancel',
-              style: GoogleFonts.syne(
-                  color: const Color(0xff007198),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16),
-            ),
-          ),
-        ],
-      );
-    },
-  );
-}
-
-void _showDeleteConfirmation(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        contentPadding: const EdgeInsets.all(20),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const CircleAvatar(
-              backgroundColor: Color(0xff007198),
-              radius: 30,
-              child: Icon(
-                Icons.check,
-                color: Color(0xffFFFFFF),
-                size: 40,
-              ),
-            ),
-            const Gap(16),
-            Text(
-              'Contact Deleted',
-              textAlign: TextAlign.center,
+              'Delete Contact',
               style:
                   GoogleFonts.syne(fontWeight: FontWeight.w500, fontSize: 24),
             ),
-            const Gap(8),
-            Text(
-              'This contact has been permanently deleted from your contacts.',
-              textAlign: TextAlign.center,
-              style:
-                  GoogleFonts.syne(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          content: Text(
+            'Once this contact is deleted, you will lose all information regarding this contact permanently. Do you wish to continue?',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.syne(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          actionsAlignment: MainAxisAlignment.end,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                get.deleteItem(id);
+                _showDeleteConfirmation(context);
+              },
+              child: Text(
+                'Yes, Delete',
+                style: GoogleFonts.syne(
+                    color: const Color(0xffFF3145),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'No, Cancel',
+                style: GoogleFonts.syne(
+                    color: const Color(0xff007198),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16),
+              ),
             ),
           ],
-        ),
-      );
-    },
-  );
+        );
+      },
+    );
+  }
+
+  void _showDeleteConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          contentPadding: const EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircleAvatar(
+                backgroundColor: Color(0xff007198),
+                radius: 30,
+                child: Icon(
+                  Icons.check,
+                  color: Color(0xffFFFFFF),
+                  size: 40,
+                ),
+              ),
+              const Gap(16),
+              Text(
+                'Contact Deleted',
+                textAlign: TextAlign.center,
+                style:
+                    GoogleFonts.syne(fontWeight: FontWeight.w500, fontSize: 24),
+              ),
+              const Gap(8),
+              Text(
+                'This contact has been permanently deleted from your contacts.',
+                textAlign: TextAlign.center,
+                style:
+                    GoogleFonts.syne(fontSize: 16, fontWeight: FontWeight.w400),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+    Future.delayed(Duration(seconds: 2), () {
+      backk();
+    });
+  }
+
+  void backk() {
+    final controller = Get.put(BottomNavigationController());
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BottomNavigation(),
+      ),
+    );
+    controller.selectedIndex.value = 1;
+  }
 }

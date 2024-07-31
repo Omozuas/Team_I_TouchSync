@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:touchsync/global-colors/colorsHex.dart';
 import 'package:touchsync/services/database/providers/contactProvider.dart';
+import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
+import 'package:touchsync/views/read_tag_screen/exchange_contact_page.dart';
 
 import 'package:touchsync/views/read_tag_screen/widget/action_botton.dart';
+import 'package:touchsync/views/read_tag_screen/widget/sucees_Icon.dart';
 import 'package:touchsync/views/settings/settings_screen.dart';
 import 'package:touchsync/views/write_tag_screen.dart';
 import 'package:touchsync/widgets/all_exchange.dart';
@@ -29,37 +33,45 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _showHalfScreenPopup(BuildContext context) {
+    var get1 = Provider.of<NFCNotifier>(context, listen: false);
+
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         final mediaQuery = MediaQuery.of(context);
         final screenHeight = mediaQuery.size.height;
         final screenWidth = mediaQuery.size.width;
-
+        get1.startNFCOperation(NFCOperation.read);
         return Container(
           width: screenWidth,
-          height: screenHeight / 2,
+          height: screenHeight / 2.3,
           padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: 10),
-              Text('Ready to scan'),
+              Text('Ready to scan', style: TextStyle(fontSize: 18)),
               SizedBox(height: 20),
               Image.asset(
-                'assets/images/icon.png',
+                'assets/images/Icon.png',
                 height: screenHeight / 6,
                 width: screenWidth / 4,
                 fit: BoxFit.contain,
               ),
               SizedBox(height: 20),
-              Text('Hold your phone steady'),
+              Text('Hold your phone steady', style: TextStyle(fontSize: 18)),
               SizedBox(height: 20),
               ActionBtn(
                 screenWidth: screenWidth,
                 screenHeight: screenHeight,
-                info: Text("Cancel"),
-                func: () => Navigator.pop(context),
+                info: Text(get1.message.isEmpty ? "Cancel" : get1.message,
+                    style: TextStyle(color: Colors.white)),
+                func: () => get1.message == 'please Enable NFC From Settings'
+                    ? Navigator.pop(context)
+                    : {
+                        Navigator.pop(context),
+                        _showHalfScreenPopup2(context, get1.map)
+                      },
                 btnColor1: GlobalColors.blue,
                 btnColor2: GlobalColors.blue,
               ),
@@ -71,16 +83,74 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _showHalfScreenPopup2(BuildContext context, map1) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        final mediaQuery = MediaQuery.of(context);
+        final screenHeight = mediaQuery.size.height;
+        final screenWidth = mediaQuery.size.width;
+
+        return Container(
+          width: screenWidth,
+          height: screenHeight / 3,
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: screenWidth / 5,
+                height: screenHeight / 5,
+                decoration: BoxDecoration(
+                  color: GlobalColors.transparentBlue,
+                  shape: BoxShape.circle,
+                ),
+                child: SuccessIcon(),
+              ),
+              Text('Scan Successful'),
+            ],
+          ),
+        );
+      },
+      isScrollControlled: true,
+    );
+    Future.delayed(Duration(seconds: 2), () {
+      backk(map1);
+    });
+  }
+
+  void backk(map1) {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ExchangePage(map: map1),
+      ),
+    );
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getrecentContacts();
+    requestContactPermissions();
   }
 
   void getrecentContacts() {
     final get = Provider.of<Contactprovider>(context, listen: false);
     get.fetchRecentContacts(ascending: false, sortBy: 'time');
+  }
+
+  Future<bool> requestContactPermissions() async {
+    var status = await Permission.contacts.status;
+    if (status.isGranted) {
+      return true;
+    } else if (status.isDenied || status.isPermanentlyDenied) {
+      return await Permission.contacts.request().isGranted;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -89,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // var screenWidth = screenSize.width;
     var screenHeight = screenSize.height;
     final get = context.watch<Contactprovider>();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -186,9 +257,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                ContactHistoryList(
-                  get: get.recentContacts,
-                ),
+                get.recentContacts.isEmpty
+                    ? Center(child: Text('No contacts available'))
+                    : ContactHistoryList(
+                        get: get.recentContacts,
+                      ),
                 const SizedBox(
                   height: 5,
                 ),

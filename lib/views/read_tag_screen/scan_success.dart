@@ -20,14 +20,14 @@ class _ReadTagSuccessPageState extends State<ReadTagSuccessPage> {
       _showHalfScreenPopup(context);
     });
 
-    Future.delayed(Duration(seconds: 5), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ExchangePage(),
-        ),
-      );
-    });
+    // Future.delayed(Duration(seconds: 5), () {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => ExchangePage(),
+    //     ),
+    //   );
+    // });
   }
 
   void _showHalfScreenPopup(BuildContext context) {

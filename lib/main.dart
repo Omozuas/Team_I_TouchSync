@@ -31,9 +31,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initilization() async {
-    print('puse......');
     await Future.delayed(Duration(seconds: 3));
-    print('unpuse......');
+
     FlutterNativeSplash.remove();
   }
 
