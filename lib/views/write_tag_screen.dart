@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 import 'package:provider/provider.dart';
 import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
 import 'package:touchsync/views/write_succesful_screen.dart';
 
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 import 'package:touchsync/widgets/custom_textfield.dart';
-import 'write_succesful_screen.dart';
 
 class WritingTagScreen extends StatefulWidget {
   final String profileType;
@@ -24,6 +22,8 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _urlController = TextEditingController();
+  TextEditingController _jobTitleController = TextEditingController();
+  TextEditingController _companyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -95,37 +95,42 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
                   controller: _phoneController,
                 ),
                 const SizedBox(height: 20),
-             
                 if (widget.profileType == 'Professional Profile') ...[
                   const SizedBox(height: 20),
-                  CustomTextField(label: 'Job Title', hintText: 'Enter job title'),
+                  CustomTextField(
+                    label: 'Job Title',
+                    hintText: 'Enter job title',
+                    controller: _jobTitleController,
+                  ),
                   const SizedBox(height: 20),
-                  CustomTextField(label: 'Company', hintText: 'Enter company name'),
+                  CustomTextField(
+                    label: 'Company',
+                    hintText: 'Enter company name',
+                    controller: _companyController,
+                  ),
                 ],
-     CustomTextField(
+                CustomTextField(
                   label: 'Social Media Links',
                   hintText: 'Enter social media links',
                   controller: _urlController,
                 ),
-
                 const SizedBox(height: 30),
                 CustomElevatedButton(
                   text: get1.message.isEmpty ? 'Save' : get1.message,
                   onPressed: () {
-
                     get1.startNFCOperation(NFCOperation.write,
                         contactName: _nameController.text,
                         contactEmail: _emailController.text,
                         contactNumber: _phoneController.text,
-                        contactUrl: _urlController.text);
-                    // Add your onPressed functionality here TO save the details and upon completion, it should navigate to the succesful screen
+                        contactUrl: _urlController.text,
+                        contactJobTitle: _jobTitleController.text,
+                        contactCompany: _companyController.text);
                     get1.message == 'DONE'
                         ? Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => WriteSuccesfulScreen()))
                         : Container();
-
                   },
                 ),
               ],
@@ -136,4 +141,3 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
     );
   }
 }
-

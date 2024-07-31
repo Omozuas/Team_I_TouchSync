@@ -69,6 +69,8 @@ class _ExchangePageState extends State<ExchangePage> {
                             'email': '${widget.map['email']}',
                             'phone': '${widget.map['phoneNumber']}',
                             'url': '${widget.map['url']}',
+                            'org': '${widget.map['company']}',
+                            'company': '${widget.map['org']}'
                           };
                           get.saveContactInfo(map);
                           Navigator.of(context).pop();
@@ -228,6 +230,7 @@ class _ExchangePageState extends State<ExchangePage> {
                   email: '${widget.map['email']}',
                   surName: '${widget.map['name']}',
                   texts: 'Recived conact from ${widget.map['name']}',
+                  phoneNumber: '${widget.map['phoneNumber']}',
                   id: uuid.v4(),
                 );
                 get.addItem(profle);

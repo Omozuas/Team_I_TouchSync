@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 
 class NFCNotifier extends ChangeNotifier {
   bool _isProcessing = false;
@@ -22,6 +22,8 @@ class NFCNotifier extends ChangeNotifier {
     String? contactEmail,
     String? contactNumber,
     String? contactUrl,
+    String? contactCompany,
+    String? contactJobTitle,
   }) async {
     try {
       setLoading(true);
@@ -48,6 +50,8 @@ class NFCNotifier extends ChangeNotifier {
                 contactEmail: contactEmail,
                 contactUrl: contactUrl,
                 contactNumber: contactNumber,
+                contactCompany: contactCompany,
+                contactJobTitle: contactJobTitle,
               );
             }
             setLoading(false);
@@ -99,13 +103,16 @@ class NFCNotifier extends ChangeNotifier {
     String? contactEmail,
     String? contactUrl,
     String? contactNumber,
+    String? contactCompany,
+    String? contactJobTitle,
   }) async {
     NdefMessage message = _createNdfMessage(
-      contactName: contactName,
-      contactEmail: contactEmail,
-      contactUrl: contactUrl,
-      contactNumber: contactNumber,
-    );
+        contactName: contactName,
+        contactEmail: contactEmail,
+        contactUrl: contactUrl,
+        contactNumber: contactNumber,
+        contactCompany: contactCompany,
+        contactJobTitle: contactJobTitle);
     await Ndef.from(nfcTag)?.write(message);
     _message = 'DONE';
   }
@@ -115,41 +122,62 @@ class NFCNotifier extends ChangeNotifier {
     String? contactEmail,
     String? contactUrl,
     String? contactNumber,
+    String? contactCompany,
+    String? contactJobTitle,
   }) {
     List<NdefRecord> records = [];
+
     if (contactUrl != null && contactUrl.isNotEmpty) {
       records.add(NdefRecord.createUri(Uri.parse(contactUrl)));
     }
+
     if (contactEmail != null && contactEmail.isNotEmpty) {
       records.add(NdefRecord.createUri(Uri.parse("mailto:$contactEmail")));
     }
+
     if (contactName != null && contactName.isNotEmpty) {
       String contactData = 'BEGIN:VCARD\nVERSION:2.1\nN:$contactName\n';
+
       if (contactEmail != null && contactEmail.isNotEmpty) {
         contactData += 'EMAIL:$contactEmail\n';
       }
+
       if (contactNumber != null && contactNumber.isNotEmpty) {
         contactData += 'TEL:$contactNumber\n';
       }
+
+      if (contactJobTitle != null && contactJobTitle.isNotEmpty) {
+        contactData += 'TITLE:$contactJobTitle\n';
+      }
+
+      if (contactCompany != null && contactCompany.isNotEmpty) {
+        contactData += 'ORG:$contactCompany\n';
+      }
+
       contactData += 'END:VCARD';
-      Uint8List contactBytes = utf8.encode(contactData);
+      Uint8List contactBytes = Uint8List.fromList(utf8.encode(contactData));
       records.add(NdefRecord.createMime('text/vcard', contactBytes));
     }
     return NdefMessage(records);
   }
-
 
   Future<void> saveContactInfo(Map<String, String?> contactInfo) async {
     print(contactInfo);
     bool permissionGranted = await requestContactPermissions();
 
     if (permissionGranted) {
-      final newContact = Contact(
-        name: Name(first: contactInfo['name'] ?? ''),
-        emails: [Email(contactInfo['email'] ?? '')],
-        phones: [Phone(contactInfo['phoneNumber'] ?? '')],
-        websites: [Website(contactInfo['url'] ?? '')],
-      );
+      final newContact =
+          Contact(name: Name(first: contactInfo['name'] ?? ''), emails: [
+        Email(contactInfo['email'] ?? '')
+      ], phones: [
+        Phone(contactInfo['phoneNumber'] ?? '')
+      ], websites: [
+        Website(contactInfo['url'] ?? '')
+      ], organizations: [
+        Organization(
+            jobDescription: contactInfo['org'] ?? '',
+            company: contactInfo['company'] ?? '')
+      ]);
 
       await FlutterContacts.insertContact(newContact);
     } else {
@@ -175,6 +203,8 @@ class NFCNotifier extends ChangeNotifier {
     String? email;
     String? phoneNumber;
     String? url;
+    String? company;
+    String? org;
     for (var line in lines) {
       if (line.startsWith('N:')) {
         name = line.substring(3);
@@ -184,6 +214,10 @@ class NFCNotifier extends ChangeNotifier {
         phoneNumber = line.substring(4);
       } else if (line.startsWith('URL:')) {
         url = line.substring(4);
+      } else if (line.startsWith('ORG:')) {
+        company = line.substring(8).trim();
+      } else if (line.startsWith('TITLE:')) {
+        org = line.substring(4).trim();
       }
     }
     return {
@@ -191,6 +225,8 @@ class NFCNotifier extends ChangeNotifier {
       'email': email,
       'phoneNumber': phoneNumber,
       'url': url,
+      'company': company,
+      'org': org
     };
   }
 }

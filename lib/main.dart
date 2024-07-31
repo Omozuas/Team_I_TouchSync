@@ -6,8 +6,6 @@ import 'package:touchsync/services/database/providers/profileProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
 
-import 'views/read_tag_screen/read_tag_screen.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsBinding widgetingbinding = WidgetsFlutterBinding.ensureInitialized();
