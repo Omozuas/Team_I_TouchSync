@@ -88,7 +88,7 @@ TouchSync is an app designed for effortless sharing of contact information via N
 
 3. **Contacts Screen:**
    - List of saved contacts with search and filter options.
-   - ![Contacts Screen](assets/images/Contacts.png)
+   - ![Contacts Screen](assets/Contacts.png)
 
 4. **History Screen:**
    - Display a log of all exchanges with timestamps.
