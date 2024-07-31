@@ -16,7 +16,7 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'profiles.db');
+    String path = join(await getDatabasesPath(), 'profiledbs.db');
     return await openDatabase(
       path,
       version: 1,
@@ -26,7 +26,7 @@ class DatabaseHelper {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE profiles(
+      CREATE TABLE profiledbs(
         id TEXT PRIMARY KEY,
         userName TEXT,
         surName TEXT,
@@ -34,29 +34,30 @@ class DatabaseHelper {
         location TEXT,
         phoneNumber TEXT,
         email TEXT,
-        messanger TEXT,
+        messenger TEXT,
         whatsapp TEXT,
         telegram TEXT,
         tiktok TEXT,
         paypal TEXT,
         youtube TEXT,
         facebook TEXT,
-        snapchat TEXT,
-        zoomMeeting TEXT,
+        instagram TEXT,
+        zoom TEXT,
         teams TEXT,
-        notion TEXT
+        notion TEXT,
+        appStore TEXT
       )
     ''');
   }
 
   Future<int> insertProfile(ProfileSchema profile) async {
     Database db = await instance.database;
-    return await db.insert('profiles', profile.toMap());
+    return await db.insert('profiledbs', profile.toMap());
   }
 
   Future<List<ProfileSchema>> fetchProfiles() async {
     Database db = await instance.database;
-    final List<Map<String, dynamic>> maps = await db.query('profiles');
+    final List<Map<String, dynamic>> maps = await db.query('profiledbs');
     return List.generate(maps.length, (i) {
       return ProfileSchema.fromMap(maps[i]);
     });
@@ -65,7 +66,7 @@ class DatabaseHelper {
   Future<int> updateProfile(ProfileSchema profile) async {
     Database db = await instance.database;
     return await db.update(
-      'profiles',
+      'profiledbs',
       profile.toMap(),
       where: 'id = ?',
       whereArgs: [profile.id],
@@ -75,7 +76,7 @@ class DatabaseHelper {
   Future<int> deleteProfile(String id) async {
     Database db = await instance.database;
     return await db.delete(
-      'profiles',
+      'profiledbs',
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -84,7 +85,7 @@ class DatabaseHelper {
   Future<ProfileSchema?> fetchProfileById(String id) async {
     Database db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(
-      'profiles',
+      'profiledbs',
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -95,5 +96,57 @@ class DatabaseHelper {
     } else {
       return null;
     }
+  }
+
+  Future<Map<String, dynamic>> getSocialMediaLinksById(String id) async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'profiledbs',
+      columns: [
+        'messenger',
+        'whatsapp',
+        'telegram',
+        'tiktok',
+        'paypal',
+        'youtube',
+        'facebook',
+        'instagram',
+        'zoom',
+        'teams',
+        'notion',
+        'appStore'
+      ],
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    Map<String, bool> socialMediaStatus = {
+      'messenger': false,
+      'whatsapp': false,
+      'telegram': false,
+      'tiktok': false,
+      'paypal': false,
+      'youtube': false,
+      'facebook': false,
+      'instagram': false,
+      'zoom': false,
+      'teams': false,
+      'notion': false,
+      'appStore': false,
+    };
+
+    int filledCount = 0;
+
+    if (maps.isNotEmpty) {
+      final profile = maps.first;
+      profile.forEach((key, value) {
+        if (value != null && value.isNotEmpty) {
+          socialMediaStatus[key] = true;
+          filledCount++;
+        }
+      });
+    }
+
+    return {'socialMediaStatus': socialMediaStatus, 'filledCount': filledCount};
   }
 }

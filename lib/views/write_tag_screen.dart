@@ -129,7 +129,14 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
                         ? Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => WriteSuccesfulScreen()))
+                                builder: (context) => WriteSuccesfulScreen(
+                                      name: _nameController.text,
+                                      phoneNumber: _phoneController.text,
+                                      email: _emailController.text,
+                                      company: _companyController.text,
+                                      location: _urlController.text,
+                                      jobTitle: _jobTitleController.text,
+                                    )))
                         : Container();
                   },
                 ),

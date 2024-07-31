@@ -1,12 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:touchsync/controller/bottomNavController/bottomNav_controller.dart';
 import 'package:touchsync/routers/bottomNavRoute/bottomNav_Route.dart';
+import 'package:touchsync/services/database/providers/tagProvider.dart';
+import 'package:touchsync/services/database/schemas/tag.schema.dart';
 import 'package:touchsync/widgets/custom_elevated_button.dart';
+import 'package:uuid/uuid.dart';
 
-class WriteSuccesfulScreen extends StatelessWidget {
-  const WriteSuccesfulScreen({super.key});
+class WriteSuccesfulScreen extends StatefulWidget {
+  const WriteSuccesfulScreen(
+      {super.key,
+      this.name,
+      this.email,
+      this.company,
+      this.jobTitle,
+      this.phoneNumber,
+      this.location});
+  final name;
+  final email;
+  final company;
+  final jobTitle;
+  final phoneNumber;
+  final location;
+  @override
+  State<WriteSuccesfulScreen> createState() => _WriteSuccesfulScreenState();
+}
+
+class _WriteSuccesfulScreenState extends State<WriteSuccesfulScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    addTags();
+  }
+
+  final uiuid = Uuid();
+  void addTags() {
+    // Add tags here
+
+    final tag = TagSchema(
+      id: uiuid.v4(),
+      name: widget.name,
+      email: widget.email,
+      company: widget.company,
+      jobTitle: widget.jobTitle,
+      phoneNumber: widget.phoneNumber,
+      urls: widget.location,
+    );
+    final get = Provider.of<Tagprovider>(context, listen: false);
+    get.addItem(tag);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +89,9 @@ class WriteSuccesfulScreen extends StatelessWidget {
             child: CustomElevatedButton(
                 text: 'Add More Tags',
                 //function to add more tags
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
           ),
           SizedBox(
             height: screenHeight * 0.02,

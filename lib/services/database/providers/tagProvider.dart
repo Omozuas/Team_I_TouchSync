@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:touchsync/services/database/realm.db.dart';
-import 'package:touchsync/services/database/schemas/profie.schema.dart';
 
-class Profileprovider extends ChangeNotifier {
+import 'package:touchsync/services/database/schemas/tag.schema.dart';
+import 'package:touchsync/services/database/tagbd.dart';
+
+class Tagprovider extends ChangeNotifier {
   bool _isLoading = false;
   bool get loading => _isLoading;
   String _message = '';
   String get message => _message;
-  ProfileSchema? _getbyId;
-  ProfileSchema? get getbyId => _getbyId;
+  TagSchema? _getbyId;
+  TagSchema? get getbyId => _getbyId;
   setLoading(bool value) {
     _isLoading = value;
   }
 
-  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
-  List<ProfileSchema> _profiles = [];
-  List<ProfileSchema> get profiles => _profiles;
-  Profileprovider() {
+  final DatabaseHelper1 _databaseHelper = DatabaseHelper1.instance;
+  List<TagSchema> _tags = [];
+  List<TagSchema> get profiles => _tags;
+  Tagprovider() {
     fetchProfiles();
   }
   Future<void> fetchProfiles() async {
     setLoading(true);
-    _profiles = await _databaseHelper.fetchProfiles();
+    _tags = await _databaseHelper.fetchProfiles();
 
     setLoading(false);
     notifyListeners();
   }
 
-  Future<void> addItem(ProfileSchema profile) async {
+  Future<void> addItem(TagSchema profile) async {
     setLoading(true);
     await _databaseHelper.insertProfile(profile);
     fetchProfiles();
@@ -36,7 +37,7 @@ class Profileprovider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateItem(ProfileSchema profile) async {
+  Future<void> updateItem(TagSchema profile) async {
     setLoading(true);
     await _databaseHelper.updateProfile(profile);
     fetchProfiles();
@@ -63,24 +64,16 @@ class Profileprovider extends ChangeNotifier {
 
   Future<void> updateProfileField(String id, String field, String value) async {
     setLoading(true);
-    ProfileSchema? profile = await DatabaseHelper.instance.fetchProfileById(id);
+    TagSchema? profile = await DatabaseHelper1.instance.fetchProfileById(id);
     if (profile != null) {
       Map<String, dynamic> updatedFields = profile.toMap();
       updatedFields[field] = value;
-      ProfileSchema updatedProfile = ProfileSchema.fromMap(updatedFields);
-      await DatabaseHelper.instance.updateProfile(updatedProfile);
+      TagSchema updatedProfile = TagSchema.fromMap(updatedFields);
+      await DatabaseHelper1.instance.updateProfile(updatedProfile);
       setLoading(false);
       notifyListeners();
     }
     setLoading(false);
     notifyListeners();
-  }
-
-  Future<Map<String, dynamic>> getSocialMediaLinksByUserId(String id) async {
-    setLoading(true);
-    var result = await _databaseHelper.getSocialMediaLinksById(id);
-    setLoading(false);
-    notifyListeners();
-    return result;
   }
 }

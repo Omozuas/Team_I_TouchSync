@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:touchsync/controller/bottomNavController/bottomNav_controller.dart';
 import 'package:touchsync/routers/bottomNavRoute/bottomNav_Route.dart';
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 
@@ -46,7 +47,13 @@ class TagsavedSuccessful extends StatelessWidget {
                   textColor: Colors.white,
                   borderColor: const Color(0xff007192),
                   // navigate to profile screen
-                  onPressed: () => controller.selectedIndex.value = 1)),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BottomNavigation()));
+                    controller.selectedIndex.value = 3;
+                  })),
         ],
       ),
     );

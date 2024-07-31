@@ -5,11 +5,12 @@ import 'package:touchsync/global-colors/colorsHex.dart';
 class ReusableProfileSwitch extends StatefulWidget {
   final String text;
   final String url;
-
-  const ReusableProfileSwitch({
+  bool isToggled;
+  ReusableProfileSwitch({
     Key? key,
     required this.text,
     required this.url,
+    required this.isToggled,
   }) : super(key: key);
 
   @override
@@ -17,11 +18,9 @@ class ReusableProfileSwitch extends StatefulWidget {
 }
 
 class _ReusableProfileSwitchState extends State<ReusableProfileSwitch> {
-  bool _isToggled = false;
-
   void _toggleSwitch(bool value) {
     setState(() {
-      _isToggled = value;
+      widget.isToggled = value;
     });
   }
 
@@ -32,11 +31,12 @@ class _ReusableProfileSwitchState extends State<ReusableProfileSwitch> {
       children: [
         Row(
           children: [
-            ImageIcon(
-              size: 30,
-              AssetImage(widget.url),
+            Image.asset(
+              widget.url,
             ),
-          SizedBox(width: 8,),
+            SizedBox(
+              width: 8,
+            ),
             Text(
               widget.text,
               style: GoogleFonts.lato(
@@ -49,7 +49,7 @@ class _ReusableProfileSwitchState extends State<ReusableProfileSwitch> {
           ],
         ),
         Switch(
-          value: _isToggled,
+          value: widget.isToggled,
           onChanged: _toggleSwitch,
           activeColor: Colors.white,
           activeTrackColor: GlobalColors.teal,

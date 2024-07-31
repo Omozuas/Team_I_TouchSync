@@ -33,7 +33,7 @@ class NFCNotifier extends ChangeNotifier {
         // Your NFC operation code here
         // For example, you can read a tag like this
         if (nfcOperation == NFCOperation.read) {
-          _message = 'Scanning...';
+          _message = 'Scanning For Contacts...';
         } else if (nfcOperation == NFCOperation.write) {
           _message = 'Write To Tag...';
         }
@@ -94,7 +94,7 @@ class NFCNotifier extends ChangeNotifier {
       // await _saveContactInfo(contactInfo);
       _message = 'success';
     }
-    _message = decodedText ?? 'No Data Found';
+    _message = decodedText!.isEmpty ? 'No Data Found' : 'proceed..';
   }
 
   Future<void> _writeToTags({
@@ -207,13 +207,13 @@ class NFCNotifier extends ChangeNotifier {
     String? org;
     for (var line in lines) {
       if (line.startsWith('N:')) {
-        name = line.substring(3);
+        name = line.substring(3).trim();
       } else if (line.startsWith('EMAIL:')) {
-        email = line.substring(6);
+        email = line.substring(6).trim();
       } else if (line.startsWith('TEL:')) {
-        phoneNumber = line.substring(4);
+        phoneNumber = line.substring(4).trim();
       } else if (line.startsWith('URL:')) {
-        url = line.substring(4);
+        url = line.substring(4).trim();
       } else if (line.startsWith('ORG:')) {
         company = line.substring(8).trim();
       } else if (line.startsWith('TITLE:')) {

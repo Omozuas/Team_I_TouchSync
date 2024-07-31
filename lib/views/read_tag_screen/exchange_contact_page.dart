@@ -221,7 +221,7 @@ class _ExchangePageState extends State<ExchangePage> {
             ActionBtn(
               screenWidth: screenWidth,
               screenHeight: screenHeight,
-              info: Text(get.loading ? 'Saving...' : "Save Contact"),
+              info: Text(get.loading ? "Save Contact" : 'Saving...'),
               func: () {
                 final now = DateTime.now();
                 var profle = ContactSchema(

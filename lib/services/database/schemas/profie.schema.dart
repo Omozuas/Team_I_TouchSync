@@ -6,37 +6,41 @@ class ProfileSchema {
   final String? location;
   final String? phoneNumber;
   final String? email;
-  final String? messanger;
+  final String? messenger;
   final String? whatsapp;
   final String? telegram;
   final String? tiktok;
   final String? paypal;
   final String? youtube;
   final String? facebook;
-  final String? snapchat;
-  final String? zoomMeeting;
+  final String? instagram;
+  final String? zoom;
   final String? teams;
   final String? notion;
 
-  ProfileSchema(
-      {required this.id,
-      this.userName,
-      this.surName,
-      this.otherName,
-      this.location,
-      this.phoneNumber,
-      this.messanger,
-      this.whatsapp,
-      this.telegram,
-      this.tiktok,
-      this.email,
-      this.paypal,
-      this.youtube,
-      this.facebook,
-      this.snapchat,
-      this.zoomMeeting,
-      this.teams,
-      this.notion});
+  final String? appStore;
+
+  ProfileSchema({
+    required this.id,
+    this.userName,
+    this.surName,
+    this.otherName,
+    this.location,
+    this.phoneNumber,
+    this.messenger,
+    this.whatsapp,
+    this.telegram,
+    this.tiktok,
+    this.email,
+    this.paypal,
+    this.youtube,
+    this.facebook,
+    this.instagram,
+    this.zoom,
+    this.teams,
+    this.appStore,
+    this.notion,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -46,7 +50,7 @@ class ProfileSchema {
       'otherName': otherName,
       'location': location,
       'phoneNumber': phoneNumber,
-      'messanger': messanger,
+      'messenger': messenger,
       'whatsapp': whatsapp,
       'telegram': telegram,
       'tiktok': tiktok,
@@ -55,8 +59,9 @@ class ProfileSchema {
       'paypal': paypal,
       'youtube': youtube,
       'facebook': facebook,
-      'snapchat': snapchat,
-      'zoomMeeting': zoomMeeting,
+      'instagram': instagram,
+      'zoom': zoom,
+      'appStore': appStore,
       'teams': teams,
     };
   }
@@ -69,7 +74,7 @@ class ProfileSchema {
       otherName: map['otherName'],
       location: map['location'],
       phoneNumber: map['phoneNumber'],
-      messanger: map['messanger'],
+      messenger: map['messenger'],
       whatsapp: map['whatsapp'],
       telegram: map['telegram'],
       tiktok: map['tiktok'],
@@ -78,8 +83,9 @@ class ProfileSchema {
       paypal: map['paypal'],
       youtube: map['youtube'],
       facebook: map['facebook'],
-      snapchat: map['snapchat'],
-      zoomMeeting: map['zoomMeeting'],
+      instagram: map['instagram'],
+      appStore: map['appStore'],
+      zoom: map['zoom'],
       teams: map['teams'],
     );
   }
