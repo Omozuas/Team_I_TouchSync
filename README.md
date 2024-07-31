@@ -79,24 +79,30 @@ TouchSync is an app designed for effortless sharing of contact information via N
 
 1. **Home Screen:**
    - Quick access to scan NFC tags and view recent exchanges.
-   - ![Home Screen](https://drive.google.com/uc?export=view&id=17qPOCvHQ88B_9u8xfFQ9k8FN0wv8L_KD)
-   - ![Home Screen](https://drive.google.com/uc?export=view&id=1MPwDfQFL8rUdCKKmiaPsgMdiu_MYz3SZ)
+   - ![Splash Screen](https://drive.google.com/uc?export=view&id=1SeitopVR1hjvb05NWEdDltarWzQX08Lv)
+   - ![Home Screen](https://drive.google.com/uc?export=view&id=1vsdOrGPHMi-i07MfEaWEJVuxQazjUohy)
+   
 
 2. **Profile Screen:**
    - Manage personal information and customize shared details.
-   - ![Profile Screen](https://drive.google.com/uc?export=view&id=1vsdOrGPHMi-i07MfEaWEJVuxQazjUohy)
+   
+   - ![Profile Screen](https://drive.google.com/uc?export=view&id=1QRtr52BSkAIy0owW-JZkSi--521tvnWV)
 
 3. **Contacts Screen:**
    - List of saved contacts with search and filter options.
-   - ![Contacts Screen](https://drive.google.com/uc?export=view&id=1QRtr52BSkAIy0owW-JZkSi--521tvnWV)
+   - ![Contact Screen](https://drive.google.com/uc?export=view&id=17qPOCvHQ88B_9u8xfFQ9k8FN0wv8L_KD)
+   
 
 4. **History Screen:**
    - Display a log of all exchanges with timestamps.
-   - ![History Screen](https://drive.google.com/uc?export=view&id=1GpwxkCVwtawnptPNnMXgbxuC5E17hbgx)
+  
+   - ![History Screen](https://drive.google.com/uc?export=view&id=1MPwDfQFL8rUdCKKmiaPsgMdiu_MYz3SZ)
 
 5. **Read Screen:**
    - Read Tag information.
-   - ![Read Screen](https://drive.google.com/uc?export=view&id=1SeitopVR1hjvb05NWEdDltarWzQX08Lv)
+   - ![Read Screen](https://drive.google.com/uc?export=view&id=1GpwxkCVwtawnptPNnMXgbxuC5E17hbgx)
+  
+   
 
 6. **Write Screen:**
    - Write to Tag Screen.
