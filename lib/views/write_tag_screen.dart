@@ -1,14 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+
 import 'package:provider/provider.dart';
 import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
 import 'package:touchsync/views/write_succesful_screen.dart';
+
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 import 'package:touchsync/widgets/custom_textfield.dart';
+import 'write_succesful_screen.dart';
 
 class WritingTagScreen extends StatefulWidget {
-  const WritingTagScreen({super.key});
+  final String profileType;
+
+  const WritingTagScreen({super.key, required this.profileType});
 
   @override
   State<WritingTagScreen> createState() => _WritingTagScreenState();
@@ -90,15 +95,24 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
                   controller: _phoneController,
                 ),
                 const SizedBox(height: 20),
-                CustomTextField(
+             
+                if (widget.profileType == 'Professional Profile') ...[
+                  const SizedBox(height: 20),
+                  CustomTextField(label: 'Job Title', hintText: 'Enter job title'),
+                  const SizedBox(height: 20),
+                  CustomTextField(label: 'Company', hintText: 'Enter company name'),
+                ],
+     CustomTextField(
                   label: 'Social Media Links',
                   hintText: 'Enter social media links',
                   controller: _urlController,
                 ),
+
                 const SizedBox(height: 30),
                 CustomElevatedButton(
                   text: get1.message.isEmpty ? 'Save' : get1.message,
                   onPressed: () {
+
                     get1.startNFCOperation(NFCOperation.write,
                         contactName: _nameController.text,
                         contactEmail: _emailController.text,
@@ -111,6 +125,7 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
                             MaterialPageRoute(
                                 builder: (context) => WriteSuccesfulScreen()))
                         : Container();
+
                   },
                 ),
               ],
@@ -121,3 +136,4 @@ class _WritingTagScreenState extends State<WritingTagScreen> {
     );
   }
 }
+

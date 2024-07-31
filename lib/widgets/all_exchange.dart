@@ -15,8 +15,13 @@ class ContactHistoryList extends StatelessWidget {
         final contact = get[index];
         return ListTile(
           leading: CircleAvatar(
+           // radius: 50,
             backgroundColor: Colors.teal,
-            child: Icon(Icons.sync, color: Colors.white),
+            child: ImageIcon(
+                        AssetImage(
+                          'assets/images/export.png',
+                        ),
+                      ),
           ),
           title: Text('${contact.texts}'),
           subtitle: Text(contact.day),
