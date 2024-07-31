@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 
 class NFCNotifier extends ChangeNotifier {
   bool _isProcessing = false;
@@ -137,6 +137,7 @@ class NFCNotifier extends ChangeNotifier {
     }
     return NdefMessage(records);
   }
+
 
   Future<void> saveContactInfo(Map<String, String?> contactInfo) async {
     print(contactInfo);
