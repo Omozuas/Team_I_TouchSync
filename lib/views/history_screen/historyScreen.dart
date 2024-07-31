@@ -35,6 +35,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Gap(16),
             buildTextField('Search history', const Color(0xffFFFFFF),
                 prefixIcon: Icons.search_outlined,
                 controller: _searchController, onChange: (value) {
