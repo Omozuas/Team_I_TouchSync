@@ -28,6 +28,7 @@ class ContactHistoryList extends StatelessWidget {
       itemBuilder: (context, index) {
         return ListTile(
           leading: CircleAvatar(
+           // radius: 50,
             backgroundColor: Colors.teal,
             child: ImageIcon(
                         AssetImage(

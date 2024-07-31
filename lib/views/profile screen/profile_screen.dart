@@ -1,203 +1,210 @@
-// import 'package:flutter/material.dart';
-
-// class ProfileScreen extends StatelessWidget {
-//   const ProfileScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Container(
-//         child: Text('welcome to profile screen'),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:touchsync/views/profile%20screen/editprofile_screen.dart';
+import 'package:touchsync/views/profile%20screen/manage_tag_screen.dart';
+import 'package:touchsync/widgets/reusableprofile_switch.dart';
 
+import '../../widgets/reusable _arrow_buttons.dart';
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage('assets/images/profile_avatar.png'), // Replace with your asset path
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Williams Mary',
-                  style: GoogleFonts.syne(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 30),
+                  Text(
+                    'Profile',
+                    style: GoogleFonts.poppins(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                        height: 0.8),
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  'Personal',
-                  style: GoogleFonts.syne(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
+                  const SizedBox(
+                    height: 35,
                   ),
-                ),
-                const SizedBox(height: 20),
-                ListTile(
-                  leading: Icon(Icons.edit),
-                  title: Text(
-                    'Edit Profile',
-                    style: GoogleFonts.syne(
-                      fontSize: 16,
+                  SizedBox(
+                    height: 89,
+                    width: 80,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      fit: StackFit.expand,
+                      children: [
+                        const CircleAvatar(
+                          radius: 50,
+                          backgroundImage: AssetImage(
+                              'assets/images/profile_avatar.png'), // Replace with your asset path
+                        ),
+                        const SizedBox(height: 10),
+                        Positioned(
+                          right: 18,
+                          bottom: -4,
+                          child: Container(
+                            height: 15,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.white,
+                                border: Border.all(color: const Color(0xff02D682))),
+                            child: Center(
+                              child: Text(
+                                'Personal',
+                                style: GoogleFonts.syne(
+                                  fontSize: 10,
+                                  height: 0.8,
+                                  letterSpacing: 0.2,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Williams Mary',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
                       fontWeight: FontWeight.w500,
+                      height: 0.8,
+                      letterSpacing: 0.2,
                       color: Colors.black,
                     ),
                   ),
-                  trailing: Icon(Icons.chevron_right),
-                  onTap: () {
-                    // Handle Edit Profile tap
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.tag),
-                  title: Text(
-                    'Manage Tags',
-                    style: GoogleFonts.syne(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                  InkWell(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => EditprofileScreen()));
+                            },
+                    child: const ReusableArrowButtons(
+                      text: 'Edit Profile', url: 'assets/images/arrow-left.png',
+                     
                     ),
                   ),
-                  trailing: Icon(Icons.chevron_right),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                 InkWell(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ManageTagScreen()));
+                            },
+                    child: const ReusableArrowButtons(
+                      text: 'Manage Tags', url: 'assets/images/arrow-left.png',
+                     
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                GestureDetector(
                   onTap: () {
-                    // Handle Manage Tags tap
-                  },
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton.icon(
-                  icon: Icon(Icons.add),
-                  label: Text('Add New Link'),
-                  onPressed: () {
                     // Handle Add New Link button press
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF0056D2),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: 180,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF007198),
+                      borderRadius: BorderRadius.circular(18.0),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    textStyle: GoogleFonts.syne(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          height: 30,
+                          width: 30,
+                          decoration:BoxDecoration(
+                           borderRadius: BorderRadius.circular(50),
+                           color: Colors.white,
+                          ), 
+                        
+                          child: const Icon(
+                            Icons.link,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Add New Link',
+                          style: GoogleFonts.syne(
+                            fontSize: 14,
+                            height: 0.8,
+                            letterSpacing: -0.5,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'My Links',
-                    style: GoogleFonts.syne(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'My Links',
+                          style: GoogleFonts.syne(
+                            fontSize: 16,
+                            height: 1,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                              // this link is supposed to increse as the switch buttons are beign selected
+                     Container(
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Color(0xff1A1F1D), // Color of the underline
+                              width: 1.0, // Width of the underline
+                            ),
+                          ),
+                        ),
+                       
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              '(2 Links)',
+                              style: GoogleFonts.syne(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                height: 0.8,
+                                color: const Color(0xff1A1F1D),
+                              ),),
+                          ),
+                        )
+                         
+                      ],
                     ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Tiktok',
-                      style: GoogleFonts.syne(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Switch(
-                      value: true,
-                      onChanged: (value) {
-                        // Handle switch toggle
-                      },
-                      activeColor: Colors.white,
-                      activeTrackColor: Colors.green,
-                      inactiveThumbColor: Colors.white,
-                      inactiveTrackColor: Colors.grey,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Youtube',
-                      style: GoogleFonts.syne(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Switch(
-                      value: false,
-                      onChanged: (value) {
-                        // Handle switch toggle
-                      },
-                      activeColor: Colors.white,
-                      activeTrackColor: Colors.green,
-                      inactiveThumbColor: Colors.white,
-                      inactiveTrackColor: Colors.grey,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Facebook',
-                      style: GoogleFonts.syne(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Switch(
-                      value: false,
-                      onChanged: (value) {
-                        // Handle switch toggle
-                      },
-                      activeColor: Colors.white,
-                      activeTrackColor: Colors.green,
-                      inactiveThumbColor: Colors.white,
-                      inactiveTrackColor: Colors.grey,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Messenger',
-                      style: GoogleFonts.syne(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                   
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
+                  const SizedBox(height: 10),
+                 const ReusableProfileSwitch(text: 'Tiktok', url: 'assets/images/mage_tiktok-circle.png'),
+                  const ReusableProfileSwitch(text: 'Youtube', url: 'assets/images/logos_youtube-icon.png'),
+                     const ReusableProfileSwitch(text: 'Facebook', url: 'assets/images/logos_facebook.png'),
+                     const ReusableProfileSwitch(text: 'Messenger', url: 'assets/images/_Social Icons.png'),
+                    const ReusableProfileSwitch(text: 'Telegram', url: 'assets/images/logos_telegram.png'),
+                    const ReusableProfileSwitch(text: 'Instagram', url: 'assets/images/skill-icons_instagram.png'),
+                    const ReusableProfileSwitch(text: 'Whatsapp', url: 'assets/images/logos_whatsapp-icon.png'),
+                     const ReusableProfileSwitch(text: 'Paypal', url: 'assets/images/paypal.png'),
+                     const ReusableProfileSwitch(text: 'Zoom', url: 'assets/images/akar-icons_zoom-fill.png'),
+                     const ReusableProfileSwitch(text: 'Teams', url: 'assets/images/teams.png'),
+                     const ReusableProfileSwitch(text: 'Notion', url: 'assets/images/notion.png'),
+                     const ReusableProfileSwitch(text: 'App store', url: 'assets/images/logos_apple-app-store.png'),
+
+
+            
+            
+                ])));
   }
 }

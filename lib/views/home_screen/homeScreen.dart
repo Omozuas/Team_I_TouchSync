@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:touchsync/views/choosetag_screen.dart';
+import 'package:touchsync/views/home_screen/subscreen/choosetag_screen.dart';
 
-import 'package:touchsync/views/scan_tag_screen.dart';
+import 'package:touchsync/views/home_screen/subscreen/scan_tag_screen.dart';
 import 'package:touchsync/views/settings/settings_screen.dart';
-import 'package:touchsync/views/write_tag_screen.dart';
 import 'package:touchsync/widgets/all_exchange.dart';
 import 'package:touchsync/widgets/home_screen_row_text.dart';
 import 'package:touchsync/widgets/nfc_tag_buttons.dart';
@@ -60,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SettingsScreen()));
+                                  builder: (context) => const SettingsScreen()));
                         },
                         child: const ImageIcon(
                           AssetImage(
@@ -106,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             url: 'assets/images/scanner.png',
                             isSelected: _selectedButton == 'Scan NFC Tag',
                             onTap: () => _onButtonTap(
-                                'Scan NFC Tag', ScanningTagScreen()),
+                                'Scan NFC Tag', const ScanningTagScreen()),
                           ),
                         ]),
                   )
@@ -124,6 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
                   height: 10,
@@ -131,10 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ContactHistoryList(),
               ],
             ),
-            // Container(
-            //   color: Colors.amber,
-            //   height: 400,
-            // )
+            
           ],
         ),
       ),
