@@ -79,35 +79,34 @@ TouchSync is an app designed for effortless sharing of contact information via N
 
 1. **Home Screen:**
    - Quick access to scan NFC tags and view recent exchanges.
-   - ![Splash Screen](https://drive.google.com/file/d/1eBPGybt5PMSR5VSe_w2EZPYaV7fxeDJc/view?usp=drive_link)
-   - ![Home Screen](https://drive.google.com/file/d/17TvbvLCyYgoUoDaPn_WAEu6QTT6T9tE9/view?usp=drive_link)
+   - ![Splash Screen](https://drive.google.com/uc?export=view&id=1SeitopVR1hjvb05NWEdDltarWzQX08Lv)
+   - ![Home Screen](https://drive.google.com/uc?export=view&id=1vsdOrGPHMi-i07MfEaWEJVuxQazjUohy)
    
 
 2. **Profile Screen:**
    - Manage personal information and customize shared details.
    
-   - ![Profile Screen](https://drive.google.com/file/d/166FVavNdm0Wo33213Wby34FWNDy2IxPm/view?usp=sharing)
+   - ![Profile Screen](https://drive.google.com/uc?export=view&id=1QRtr52BSkAIy0owW-JZkSi--521tvnWV)
 
-3. **Exchange Screen:**
-   - List ofall Exchanges.
-   - ![Contact Screen](https://drive.google.com/file/d/1RjjGAK2gl2hoGpKx-u-lK4txg3wopjqq/view?usp=sharing)
+3. **Contacts Screen:**
+   - List of saved contacts with search and filter options.
+   - ![Contact Screen](https://drive.google.com/uc?export=view&id=17qPOCvHQ88B_9u8xfFQ9k8FN0wv8L_KD)
    
 
 4. **History Screen:**
    - Display a log of all exchanges with timestamps.
   
-   - ![History Screen](https://drive.google.com/file/d/1Hsm2yeNXOI5NHITNp5Ba1HaT33HQNaDA/view?usp=sharing)
+   - ![History Screen](https://drive.google.com/uc?export=view&id=1MPwDfQFL8rUdCKKmiaPsgMdiu_MYz3SZ)
 
 5. **Read Screen:**
    - Read Tag information.
-   - ![Read Screen](https://drive.google.com/file/d/17BUOwru69GMVtOdeTx5-9jV2KSP5fwuz/view?usp=sharing)
+   - ![Read Screen](https://drive.google.com/uc?export=view&id=1GpwxkCVwtawnptPNnMXgbxuC5E17hbgx)
   
    
 
 6. **Write Screen:**
    - Write to Tag Screen.
-   - ![Write Screen](https://drive.google.com/file/d/1W6bL6WcRr-FuHkFUH2ZSZle4Nq2HtKKK/view?usp=sharing)
-   - ![Write Screen](https://drive.google.com/file/d/1W6bL6WcRr-FuHkFUH2ZSZle4Nq2HtKKK/view?usp=sharing)
+   - ![Write Screen](https://drive.google.com/uc?export=view&id=1DriPI8IYIo4N53K_bYH834mvKhz1ULvj)
 
 ## Technical Features
 
