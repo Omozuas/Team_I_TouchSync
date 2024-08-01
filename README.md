@@ -79,34 +79,30 @@ TouchSync is an app designed for effortless sharing of contact information via N
 
 1. **Home Screen:**
    - Quick access to scan NFC tags and view recent exchanges.
-   - ![Splash Screen](https://drive.google.com/uc?export=view&id=1SeitopVR1hjvb05NWEdDltarWzQX08Lv)
-   - ![Home Screen](https://drive.google.com/uc?export=view&id=1vsdOrGPHMi-i07MfEaWEJVuxQazjUohy)
-   
+   - ![Splash Screen](https://drive.google.com/uc?export=view&id=1Zr-H48d7pSq5d7I14hQpJdDNNqN1tdDD)
+   - ![Home Screen](https://drive.google.com/uc?export=view&id=1V3vEm-x9Cwh1to1sn9rIe6JNUPHtmlaw)
 
 2. **Profile Screen:**
    - Manage personal information and customize shared details.
-   
-   - ![Profile Screen](https://drive.google.com/uc?export=view&id=1QRtr52BSkAIy0owW-JZkSi--521tvnWV)
+   - ![Profile Screen](https://drive.google.com/uc?export=view&id=1vR9GHjImNfyaADRo6VYP1c9GiR0Z-CFh)
 
-3. **Contacts Screen:**
-   - List of saved contacts with search and filter options.
-   - ![Contact Screen](https://drive.google.com/uc?export=view&id=17qPOCvHQ88B_9u8xfFQ9k8FN0wv8L_KD)
-   
+3. **Exchange Screen:**
+   - List of all exchanges.
+   - ![Exchange Screen](https://drive.google.com/uc?export=view&id=10u5z3HfRdWaFSp3PGgkaDpC1YLOzmwGg)
 
 4. **History Screen:**
-   - Display a log of all exchanges with timestamps.
-  
-   - ![History Screen](https://drive.google.com/uc?export=view&id=1MPwDfQFL8rUdCKKmiaPsgMdiu_MYz3SZ)
+   - Display a log of all histories.
+   - ![History Screen](https://drive.google.com/uc?export=view&id=1Zf3W0X08wfcUZd3hmQ9oaEy-O3EOb0ce)
 
 5. **Read Screen:**
    - Read Tag information.
-   - ![Read Screen](https://drive.google.com/uc?export=view&id=1GpwxkCVwtawnptPNnMXgbxuC5E17hbgx)
-  
-   
+   - ![Read Screen](https://drive.google.com/uc?export=view&id=1IzKM5FeHD9SWLb5wWKYTXqOPe1HGc8Kl)
+   - ![Read Screen](https://drive.google.com/uc?export=view&id=1qemWu-i7yShlCqgvYFvg3Db9A5GGzhQE)
 
 6. **Write Screen:**
    - Write to Tag Screen.
-   - ![Write Screen](https://drive.google.com/uc?export=view&id=1DriPI8IYIo4N53K_bYH834mvKhz1ULvj)
+   - ![Write Screen](https://drive.google.com/uc?export=view&id=12ghDb-QcVfLvAqPxA-gSrnsK-507iez2)
+   - ![Write Screen](https://drive.google.com/uc?export=view&id=1jlqZaVvfflgHzGSADShlRSvrsFfpqYSq)
 
 ## Technical Features
 
