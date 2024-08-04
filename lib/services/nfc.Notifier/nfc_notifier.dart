@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:nfc_manager/nfc_manager.dart';
@@ -72,20 +75,22 @@ class NFCNotifier extends ChangeNotifier {
   }
 
   Future<void> readFromTag(NfcTag tag) async {
-    var ndef = Ndef.from(tag);
+    Map<String, dynamic> nfcData = {
+      'nfca': tag.data['nfca'],
+      'mifareultralight': tag.data['mifareultralight'],
+      'ndef': tag.data['ndef']
+    };
     String? decodedText;
-    _message = 'Tap to read';
-    if (ndef != null) {
-      NdefMessage message = await ndef.read();
-      if (message.records.isNotEmpty) {
-        decodedText = String.fromCharCodes(message.records.first.payload);
+    if (nfcData.containsKey('ndef')) {
+      List<int> payload =
+          nfcData['ndef']['cachedMessage']?['records']?[0]['payload'];
+      decodedText = String.fromCharCodes(payload);
+      var contactInfo = parseContactInfo(decodedText);
+      _map = contactInfo;
+      print(decodedText);
+      print({'map': _map});
 
-        var contactInfo = parseContactInfo(decodedText);
-        _map = contactInfo;
-        print({'map': _map});
-
-        // notifyListeners();
-      }
+      // notifyListeners();
     }
     _message = decodedText ?? 'No Data Found';
   }
@@ -141,7 +146,13 @@ class NFCNotifier extends ChangeNotifier {
         contactData += 'URL:$contactUrl\n';
       }
       contactData += 'END:VCARD';
-      return NdefMessage([NdefRecord.createText(contactData)]);
+      Uint8List contactBytes = utf8.encode(contactData);
+      return NdefMessage([
+        NdefRecord.createMime(
+          'text/vcard',
+          contactBytes,
+        )
+      ]);
     }
     return const NdefMessage([]);
   }
