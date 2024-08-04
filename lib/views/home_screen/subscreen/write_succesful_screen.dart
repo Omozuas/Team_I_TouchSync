@@ -99,7 +99,7 @@ class _WriteSuccesfulScreenState extends State<WriteSuccesfulScreen> {
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomElevatedButton(
-                  text: 'Go to Home',
+                  text: 'Go to Profile',
                   backgroundColor: Colors.white,
                   textColor: Color(0xff007192),
                   borderColor: const Color(0xff007192),

@@ -239,30 +239,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ],
                 )),
             Gap(40),
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Color(0xff007198)),
-                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12))),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BottomNavigation()));
-                    controller.selectedIndex.value = 1;
-                  },
-                  child: Text(
-                    'Export',
-                    style: GoogleFonts.syne(
-                        color: Color(0xffFFFFFF),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                  )),
-            )
           ],
         ),
       ),

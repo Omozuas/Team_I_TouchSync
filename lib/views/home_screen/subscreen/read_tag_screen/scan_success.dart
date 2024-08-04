@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:touchsync/global-colors/colorsHex.dart';
-import 'package:touchsync/views/read_tag_screen/exchange_contact_page.dart';
-import '../home_screen/homeScreen.dart';
 import 'widget/sucees_Icon.dart';
 
 class ReadTagSuccessPage extends StatefulWidget {

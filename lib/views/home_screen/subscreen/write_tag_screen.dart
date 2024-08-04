@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:provider/provider.dart';
 import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
-import 'package:touchsync/views/write_succesful_screen.dart';
+import 'package:touchsync/views/home_screen/subscreen/write_succesful_screen.dart';
 
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 import 'package:touchsync/widgets/custom_textfield.dart';

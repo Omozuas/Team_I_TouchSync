@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:touchsync/services/database/providers/contactProvider.dart';
 import 'package:touchsync/services/database/providers/tagProvider.dart';
-import 'package:touchsync/views/edit_tag_screen.dart';
+import 'package:touchsync/views/profile%20screen/subScreen/settingsScreen/edit_tag_screen.dart';
 import 'package:touchsync/views/profile%20screen/subScreen/deletfeedbackScreen.dart';
 
 class ManageTagScreen extends StatefulWidget {

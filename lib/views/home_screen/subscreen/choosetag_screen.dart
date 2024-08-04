@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:touchsync/views/write_tag_screen.dart';
+import 'package:touchsync/views/home_screen/subscreen/write_tag_screen.dart';
 
 import '../../../widgets/reusable _arrow_buttons.dart';
 

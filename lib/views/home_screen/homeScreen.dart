@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:touchsync/views/home_screen/subscreen/choosetag_screen.dart';
-
-import 'package:touchsync/views/home_screen/subscreen/scan_tag_screen.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:touchsync/global-colors/colorsHex.dart';
 import 'package:touchsync/services/database/providers/contactProvider.dart';
 import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
-import 'package:touchsync/views/read_tag_screen/exchange_contact_page.dart';
+import 'package:touchsync/views/home_screen/subscreen/read_tag_screen/exchange_contact_page.dart';
 
-import 'package:touchsync/views/read_tag_screen/widget/action_botton.dart';
-import 'package:touchsync/views/read_tag_screen/widget/sucees_Icon.dart';
+import 'package:touchsync/views/home_screen/subscreen/read_tag_screen/widget/action_botton.dart';
+import 'package:touchsync/views/home_screen/subscreen/read_tag_screen/widget/sucees_Icon.dart';
 
-import 'package:touchsync/views/settings/settings_screen.dart';
+import 'package:touchsync/views/profile%20screen/subScreen/settingsScreen/settings_screen.dart';
 import 'package:touchsync/widgets/all_exchange.dart';
 import 'package:touchsync/widgets/home_screen_row_text.dart';
 import 'package:touchsync/widgets/nfc_tag_buttons.dart';
@@ -71,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 screenHeight: screenHeight,
                 info: Text(get1.message.isEmpty ? "Cancel" : get1.message,
                     style: TextStyle(color: Colors.white)),
-                func: () => get1.message == 'please Enable NFC From Settings'
+                func: () => get1.message == 'please Enable NFC From Setting'
                     ? Navigator.pop(context)
                     : {
                         Navigator.pop(context),
@@ -193,7 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SettingsScreen()));
+                                  builder: (context) =>
+                                      const SettingsScreen()));
                         },
                         child: const ImageIcon(
                           AssetImage(
@@ -241,7 +238,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               _showHalfScreenPopup(context);
                             },
-
                           ),
                         ]),
                   ),
@@ -253,7 +249,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: RowWithTwoTexts(text1: 'Recent Exchanges', text2: 'View all'),
+              child:
+                  RowWithTwoTexts(text1: 'Recent Exchanges', text2: 'View all'),
             ),
             const SizedBox(
               height: 10,
@@ -275,7 +272,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            
           ],
         ),
       ),

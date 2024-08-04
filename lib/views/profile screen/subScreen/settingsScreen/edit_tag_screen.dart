@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:touchsync/services/database/providers/tagProvider.dart';
 import 'package:touchsync/services/database/schemas/tag.schema.dart';
-import 'package:touchsync/views/tagsaved_successful.dart';
+import 'package:touchsync/views/home_screen/subscreen/tagsaved_successful.dart';
 import 'package:touchsync/widgets/custom_elevated_button.dart';
 
 class EditTagScreen extends StatefulWidget {

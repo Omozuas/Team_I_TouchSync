@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:touchsync/services/database/providers/contactProvider.dart';
 import 'package:touchsync/services/database/schemas/contact.schema.dart';
 import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
-import 'package:touchsync/views/read_tag_screen/success_exchange.dart';
+import 'package:touchsync/views/home_screen/subscreen/read_tag_screen/success_exchange.dart';
 import 'package:touchsync/widgets/dateformatter.dart';
 import 'package:uuid/uuid.dart';
-import '../../global-colors/colorsHex.dart';
+import '../../../../global-colors/colorsHex.dart';
 import 'widget/action_botton.dart';
 import 'widget/read_page_form.dart';
 
@@ -142,7 +142,7 @@ class _ExchangePageState extends State<ExchangePage> {
             SizedBox(height: 20),
             Center(
               child: Text(
-                widget.map.isEmpty ? 'Omozua Judah' : '${widget.map['name']}',
+                widget.map.isEmpty ? '' : '${widget.map['name']}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
               ),
             ),
@@ -231,6 +231,8 @@ class _ExchangePageState extends State<ExchangePage> {
                   surName: '${widget.map['name']}',
                   texts: 'Recived conact from ${widget.map['name']}',
                   phoneNumber: '${widget.map['phoneNumber']}',
+                  userName: '${widget.map['name']}',
+                  otherName: '${widget.map['name']}',
                   id: uuid.v4(),
                 );
                 get.addItem(profle);

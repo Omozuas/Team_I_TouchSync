@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:touchsync/global-colors/colorsHex.dart';
-import 'package:touchsync/views/read_tag_screen/widget/action_botton.dart';
+import 'package:touchsync/views/home_screen/subscreen/read_tag_screen/widget/action_botton.dart';
 import 'widget/sucees_Icon.dart';
 
 class SuccessExchangePage extends StatelessWidget {
