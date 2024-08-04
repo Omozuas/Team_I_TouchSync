@@ -92,7 +92,7 @@ class NFCNotifier extends ChangeNotifier {
 
       // notifyListeners();
     }
-    _message = decodedText ?? 'No Data Found';
+    _message = decodedText!.isEmpty ? 'No Data Found' : 'Tap to proceed';
   }
 
   Future<void> writeToTags({
