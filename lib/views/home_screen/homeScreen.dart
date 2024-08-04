@@ -70,8 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 func: () => get1.message == 'please Enable NFC From Setting'
                     ? Navigator.pop(context)
                     : {
-                        Navigator.pop(context),
-                        _showHalfScreenPopup2(context, get1.map)
+                        if (get1.message == 'success') Navigator.pop(context),
+                        if (get1.message == 'success')
+                          _showHalfScreenPopup2(context, get1.map)
                       },
                 btnColor1: GlobalColors.blue,
                 btnColor2: GlobalColors.blue,
@@ -217,22 +218,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 1.0),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           NfcTagButtons(
-                            text: 'Write NFC Tag',
+                            text: 'Write',
                             url: 'assets/images/edit-2.png',
                             isSelected: _selectedButton == 'Write NFC Tag',
                             onTap: () => _onButtonTap(
                                 'Write NFC Tag', ChooseTagProfileScreen()),
                           ),
                           NfcTagButtons(
-                            text: 'Scan NFC Tag',
+                            text: 'Scan ',
                             url: 'assets/images/scanner.png',
                             isSelected: _selectedButton == 'Scan NFC Tag',
                             onTap: () {

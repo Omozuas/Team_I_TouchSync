@@ -86,15 +86,14 @@ class NFCNotifier extends ChangeNotifier {
       List<int> payload =
           nfcData['ndef']['cachedMessage']?['records']?[0]['payload'];
       decodedText = String.fromCharCodes(payload);
-
+      print({'did': decodedText});
       // Parse contact information from the decoded text
       var contactInfo = _parseContactInfo(decodedText);
       _map = contactInfo;
       // // Save the parsed contact information to the phone's contacts
       // await _saveContactInfo(contactInfo);
-      _message = 'success';
+      _message = decodedText.isEmpty ? 'No Data Found' : 'success';
     }
-    _message = decodedText!.isEmpty ? 'No Data Found' : 'proceed..';
   }
 
   Future<void> _writeToTags({
