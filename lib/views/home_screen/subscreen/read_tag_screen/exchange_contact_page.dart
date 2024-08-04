@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:touchsync/controller/bottomNavController/bottomNav_controller.dart';
 import 'package:touchsync/services/database/providers/contactProvider.dart';
 import 'package:touchsync/services/database/schemas/contact.schema.dart';
 import 'package:touchsync/services/nfc.Notifier/nfc_notifier.dart';
@@ -11,8 +12,8 @@ import 'widget/action_botton.dart';
 import 'widget/read_page_form.dart';
 
 class ExchangePage extends StatefulWidget {
-  ExchangePage({required this.map, super.key});
-  Map<String, String?> map;
+  ExchangePage({super.key});
+
   @override
   State<ExchangePage> createState() => _ExchangePageState();
 }
@@ -27,9 +28,9 @@ class _ExchangePageState extends State<ExchangePage> {
     final mediaQuery = MediaQuery.of(context);
     final screenHeight = mediaQuery.size.height;
     final screenWidth = mediaQuery.size.width;
-
+    final get1 = Provider.of<NFCNotifier>(context, listen: false);
     void _showSaveContactDialog(
-        BuildContext context, Map<String, String?> map) {
+        BuildContext context, Map<String, String?> map1) {
       final get = Provider.of<NFCNotifier>(context, listen: false);
       showDialog(
         context: context,
@@ -50,7 +51,7 @@ class _ExchangePageState extends State<ExchangePage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    'Save this contact to your phone storage.\nDo you want to allow this?',
+                    'Save this contact to your phone storage. Do you want to allow this?',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18),
                   ),
@@ -64,15 +65,15 @@ class _ExchangePageState extends State<ExchangePage> {
                           style: TextStyle(color: Colors.blue, fontSize: 18),
                         ),
                         onPressed: () {
-                          map = {
-                            'name': '${widget.map['name']}',
-                            'email': '${widget.map['email']}',
-                            'phone': '${widget.map['phoneNumber']}',
-                            'url': '${widget.map['url']}',
-                            'org': '${widget.map['company']}',
-                            'company': '${widget.map['org']}'
+                          map1 = {
+                            'name': get.map['name'],
+                            'email': get.map['email'],
+                            'phone': get.map['phoneNumber'],
+                            'url': get.map['url'],
+                            'org': get.map['company'],
+                            'company': get.map['org'],
                           };
-                          get.saveContactInfo(map);
+                          get.saveContactInfo(map1);
                           Navigator.of(context).pop();
                           Navigator.push(
                             context,
@@ -84,7 +85,7 @@ class _ExchangePageState extends State<ExchangePage> {
                       ),
                       TextButton(
                         child: Text(
-                          'DisAllow',
+                          'Disallow',
                           style: TextStyle(color: Colors.red, fontSize: 18),
                         ),
                         onPressed: () {
@@ -101,14 +102,15 @@ class _ExchangePageState extends State<ExchangePage> {
       );
     }
 
-    if (widget.map.isNotEmpty) {
-      _emailController.text = widget.map['email'] ?? '';
-      _phoneController.text = widget.map['phoneNumber'] ?? '';
-      _urlController.text = widget.map['url'] ?? '';
-      _showWorkingController.text = widget.map['location'] ?? '';
+    if (get1.map.isNotEmpty) {
+      _emailController.text = get1.map['email'] ?? '';
+      _phoneController.text = get1.map['phoneNumber'] ?? '';
+      _urlController.text = get1.map['url'] ?? '';
+      _showWorkingController.text = get1.map['location'] ?? '';
     }
     final get = context.watch<Contactprovider>();
     final uuid = Uuid();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -120,7 +122,12 @@ class _ExchangePageState extends State<ExchangePage> {
             child: Icon(Icons.arrow_back, color: Colors.black),
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BottomNavigation(),
+              ),
+            );
           },
         ),
         title: Text(
@@ -142,7 +149,7 @@ class _ExchangePageState extends State<ExchangePage> {
             SizedBox(height: 20),
             Center(
               child: Text(
-                widget.map.isEmpty ? '' : '${widget.map['name']}',
+                get1.map.isEmpty ? '' : '${get1.map['name']}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
               ),
             ),
@@ -221,21 +228,21 @@ class _ExchangePageState extends State<ExchangePage> {
             ActionBtn(
               screenWidth: screenWidth,
               screenHeight: screenHeight,
-              info: Text(get.loading ? "Save Contact" : 'Saving...'),
+              info: Text(get.loading ? 'Saving...' : "Save Contact"),
               func: () {
                 final now = DateTime.now();
-                var profle = ContactSchema(
+                var profile = ContactSchema(
                   day: '${formatDay(now)}',
                   time: '${formatTime(now)}',
-                  email: '${widget.map['email']}',
-                  surName: '${widget.map['name']}',
-                  texts: 'Recived conact from ${widget.map['name']}',
-                  phoneNumber: '${widget.map['phoneNumber']}',
-                  userName: '${widget.map['name']}',
-                  otherName: '${widget.map['name']}',
+                  email: '${get1.map['email']}',
+                  surName: '${get1.map['name']}',
+                  texts: 'Received contact from ${get1.map['name']}',
+                  phoneNumber: '${get1.map['phoneNumber']}',
+                  userName: '${get1.map['name']}',
+                  otherName: '${get1.map['name']}',
                   id: uuid.v4(),
                 );
-                get.addItem(profle);
+                get.addItem(profile);
                 setState(() {});
                 Navigator.pop(context);
               },
@@ -250,7 +257,7 @@ class _ExchangePageState extends State<ExchangePage> {
                 "Save to phone",
                 style: TextStyle(color: GlobalColors.blue),
               ),
-              func: () => _showSaveContactDialog(context, widget.map),
+              func: () => _showSaveContactDialog(context, get1.map),
               btnColor1: GlobalColors.white,
               btnColor2: GlobalColors.blue,
             ),

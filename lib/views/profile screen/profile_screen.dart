@@ -34,10 +34,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void getSocialMediaLinksCount() async {
     var result = await Provider.of<Profileprovider>(context, listen: false)
         .getSocialMediaLinksByUserId('user123');
-    setState(() {
-      _socialMediaLinksCount = result['filledCount'] ?? 0;
-      _socialMediaStatus = result['socialMediaStatus'] ?? {};
-    });
+
+    _socialMediaLinksCount = result['filledCount'] ?? 0;
+    _socialMediaStatus = result['socialMediaStatus'] ?? {};
   }
 
   @override

@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:nfc_manager/nfc_manager.dart';
@@ -31,20 +29,18 @@ class NFCNotifier extends ChangeNotifier {
       bool isAvail = await NfcManager.instance.isAvailable();
       if (isAvail) {
         // Your NFC operation code here
-        // For example, you can read a tag like this
-        if (nfcOperation == NFCOperation.read) {
-          _message = 'Scanning For Contacts...';
-        } else if (nfcOperation == NFCOperation.write) {
-          _message = 'Write To Tag...';
-        }
-        notifyListeners();
+
         NfcManager.instance.startSession(
           onDiscovered: (NfcTag nfcTag) async {
             // Your NFC operation code here
             if (nfcOperation == NFCOperation.read) {
-              _readFromTag(nfcTag);
+              _message = 'Scanning For Contacts...';
+              setLoading(true);
+              readFromTag(nfcTag);
             } else if (nfcOperation == NFCOperation.write) {
-              await _writeToTags(
+              _message = 'Write To Tag...';
+              setLoading(true);
+              await writeToTags(
                 nfcTag: nfcTag,
                 contactName: contactName,
                 contactEmail: contactEmail,
@@ -75,28 +71,26 @@ class NFCNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> _readFromTag(NfcTag tag) async {
-    Map<String, dynamic> nfcData = {
-      'nfca': tag.data['nfca'],
-      'mifareultralight': tag.data['mifareultralight'],
-      'ndef': tag.data['ndef']
-    };
+  Future<void> readFromTag(NfcTag tag) async {
+    var ndef = Ndef.from(tag);
     String? decodedText;
-    if (nfcData.containsKey('ndef')) {
-      List<int> payload =
-          nfcData['ndef']['cachedMessage']?['records']?[0]['payload'];
-      decodedText = String.fromCharCodes(payload);
-      print({'did': decodedText});
-      // Parse contact information from the decoded text
-      var contactInfo = _parseContactInfo(decodedText);
-      _map = contactInfo;
-      // // Save the parsed contact information to the phone's contacts
-      // await _saveContactInfo(contactInfo);
-      _message = decodedText.isEmpty ? 'No Data Found' : 'success';
+    _message = 'Tap to read';
+    if (ndef != null) {
+      NdefMessage message = await ndef.read();
+      if (message.records.isNotEmpty) {
+        decodedText = String.fromCharCodes(message.records.first.payload);
+
+        var contactInfo = parseContactInfo(decodedText);
+        _map = contactInfo;
+        print({'map': _map});
+
+        // notifyListeners();
+      }
     }
+    _message = decodedText ?? 'No Data Found';
   }
 
-  Future<void> _writeToTags({
+  Future<void> writeToTags({
     required NfcTag nfcTag,
     String? contactName,
     String? contactEmail,
@@ -105,7 +99,7 @@ class NFCNotifier extends ChangeNotifier {
     String? contactCompany,
     String? contactJobTitle,
   }) async {
-    NdefMessage message = _createNdfMessage(
+    NdefMessage message = createNdfMessage(
         contactName: contactName,
         contactEmail: contactEmail,
         contactUrl: contactUrl,
@@ -116,7 +110,7 @@ class NFCNotifier extends ChangeNotifier {
     _message = 'DONE';
   }
 
-  NdefMessage _createNdfMessage({
+  NdefMessage createNdfMessage({
     String? contactName,
     String? contactEmail,
     String? contactUrl,
@@ -124,16 +118,6 @@ class NFCNotifier extends ChangeNotifier {
     String? contactCompany,
     String? contactJobTitle,
   }) {
-    List<NdefRecord> records = [];
-
-    if (contactUrl != null && contactUrl.isNotEmpty) {
-      records.add(NdefRecord.createUri(Uri.parse(contactUrl)));
-    }
-
-    if (contactEmail != null && contactEmail.isNotEmpty) {
-      records.add(NdefRecord.createUri(Uri.parse("mailto:$contactEmail")));
-    }
-
     if (contactName != null && contactName.isNotEmpty) {
       String contactData = 'BEGIN:VCARD\nVERSION:2.1\nN:$contactName\n';
 
@@ -153,11 +137,13 @@ class NFCNotifier extends ChangeNotifier {
         contactData += 'ORG:$contactCompany\n';
       }
 
+      if (contactUrl != null && contactUrl.isNotEmpty) {
+        contactData += 'URL:$contactUrl\n';
+      }
       contactData += 'END:VCARD';
-      Uint8List contactBytes = Uint8List.fromList(utf8.encode(contactData));
-      records.add(NdefRecord.createMime('text/vcard', contactBytes));
+      return NdefMessage([NdefRecord.createText(contactData)]);
     }
-    return NdefMessage(records);
+    return const NdefMessage([]);
   }
 
   Future<void> saveContactInfo(Map<String, String?> contactInfo) async {
@@ -196,7 +182,7 @@ class NFCNotifier extends ChangeNotifier {
     }
   }
 
-  Map<String, String?> _parseContactInfo(String text) {
+  Map<String, String?> parseContactInfo(String text) {
     var lines = text.split('\n');
     String? name;
     String? email;
@@ -206,19 +192,27 @@ class NFCNotifier extends ChangeNotifier {
     String? org;
     for (var line in lines) {
       if (line.startsWith('N:')) {
-        name = line.substring(3).trim();
+        name = line.substring(1).trim();
+        print(name);
       } else if (line.startsWith('EMAIL:')) {
         email = line.substring(6).trim();
+        print(email);
       } else if (line.startsWith('TEL:')) {
         phoneNumber = line.substring(4).trim();
+        print(phoneNumber);
       } else if (line.startsWith('URL:')) {
         url = line.substring(4).trim();
+        print(url);
       } else if (line.startsWith('ORG:')) {
         company = line.substring(8).trim();
+        print(company);
       } else if (line.startsWith('TITLE:')) {
         org = line.substring(4).trim();
+        print(org);
       }
     }
+    print(lines);
+
     return {
       'name': name,
       'email': email,

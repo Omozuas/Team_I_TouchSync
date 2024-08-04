@@ -26,7 +26,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String _selectedButton = '';
 
-  void _onButtonTap(String button, Widget screen) {
+  void _onButtonTap(String button, Widget screen, get1) {
+    get1.startNFCOperation(NFCOperation.write);
+
     setState(() {
       _selectedButton = button;
     });
@@ -35,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showHalfScreenPopup(BuildContext context) {
     var get1 = Provider.of<NFCNotifier>(context, listen: false);
-
+    get1.startNFCOperation(NFCOperation.read);
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -67,13 +69,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 screenHeight: screenHeight,
                 info: Text(get1.message.isEmpty ? "Cancel" : get1.message,
                     style: TextStyle(color: Colors.white)),
-                func: () => get1.message == 'please Enable NFC From Setting'
-                    ? Navigator.pop(context)
-                    : {
-                        if (get1.message == 'success') Navigator.pop(context),
-                        if (get1.message == 'success')
-                          _showHalfScreenPopup2(context, get1.map)
-                      },
+                func: () => {
+                  if (get1.message == 'please Enable NFC From Settings')
+                    {Navigator.pop(context)}
+                  else
+                    {
+                      Navigator.pop(context),
+                      _showHalfScreenPopup2(context, get1.map)
+                    }
+                },
                 btnColor1: GlobalColors.blue,
                 btnColor2: GlobalColors.blue,
               ),
@@ -85,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _showHalfScreenPopup2(BuildContext context, map1) {
+  void _showHalfScreenPopup2(BuildContext context, Map<String, String?> map1) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -117,23 +121,22 @@ class _HomeScreenState extends State<HomeScreen> {
       isScrollControlled: true,
     );
     Future.delayed(Duration(seconds: 2), () {
-      backk(map1);
+      backk();
     });
   }
 
-  void backk(map1) {
+  void backk() {
     Navigator.pop(context);
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ExchangePage(map: map1),
+        builder: (context) => ExchangePage(),
       ),
     );
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getrecentContacts();
     requestContactPermissions();
@@ -158,9 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    // var screenWidth = screenSize.width;
     var screenHeight = screenSize.height;
     final get = context.watch<Contactprovider>();
+    final get1 = context.watch<NFCNotifier>();
 
     return SafeArea(
       child: Padding(
@@ -229,8 +232,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             text: 'Write',
                             url: 'assets/images/edit-2.png',
                             isSelected: _selectedButton == 'Write NFC Tag',
-                            onTap: () => _onButtonTap(
-                                'Write NFC Tag', ChooseTagProfileScreen()),
+                            onTap: () => _onButtonTap('Write NFC Tag',
+                                ChooseTagProfileScreen(), get1),
                           ),
                           NfcTagButtons(
                             text: 'Scan ',
@@ -257,8 +260,6 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
                   height: 10,
